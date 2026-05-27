@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Espacio Interactivo — MAMB</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+</head>
+<body class="app-body">
+
+  <!-- SPLASH INTERACTIVO -->
+  <div id="appSplash" class="app-splash">
+    <div class="splash-icon">
+      <svg width="52" height="44" viewBox="0 0 48 40" fill="none">
+        <path d="M24 2L46 12V28L24 38L2 28V12L24 2Z" stroke="#C9A84C" stroke-width="1.5" fill="none"/>
+        <path d="M24 10L38 17V23L24 30L10 23V17L24 10Z" stroke="#C9A84C" stroke-width="1" fill="none" opacity="0.6"/>
+        <path d="M24 18L32 22V24L24 28L16 24V22L24 18Z" fill="#C9A84C" opacity="0.5"/>
+      </svg>
+    </div>
+    <h1 class="splash-title">Museo Artistico</h1>
+  </div>
+
+  <!-- APP WRAPPER: single-page view controller -->
+  <div id="appWrapper" class="app-wrapper hidden">
+
+    <!-- ===== SCREEN 1: HOME ===== -->
+    <div class="app-screen active" id="screen-home">
+      <div class="screen-home-inner">
+        <div class="home-header">
+          <div class="home-logo">
+            <svg width="28" height="24" viewBox="0 0 48 40" fill="none">
+              <path d="M24 2L46 12V28L24 38L2 28V12L24 2Z" stroke="#C9A84C" stroke-width="2" fill="none"/>
+            </svg>
+            <span>Museo Artistico</span>
+          </div>
+          <a href="index.html" class="home-back">← Volver al MAMB</a>
+        </div>
+        <div class="home-hero">
+          <p class="home-eyebrow">Explora el Caribe</p>
+          <h1 class="home-title">Arte en cada<br/><em>trazo</em></h1>
+          <p class="home-body">Explora tu mundo artístico</p>
+        </div>
+        <div class="home-actions">
+          <button type="button" class="btn btn-primary btn-full" id="btnCrear">
+            CREAR OBRA
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+          </button>
+          <button type="button" class="btn btn-outline btn-full" id="btnMuseo">VER MUSEO</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== SCREEN 2: CAMERA / UPLOAD ===== -->
+    <div class="app-screen" id="screen-camera">
+      <div class="screen-header dark">
+        <button type="button" class="back-btn" data-target="screen-home">←</button>
+        <h2>Escanea tu dibujo</h2>
+        <span></span>
+      </div>
+      <div class="camera-area">
+        <div class="camera-frame" id="cameraFrame">
+          <svg class="camera-icon" width="48" height="40" viewBox="0 0 24 20" fill="none" stroke="#555" stroke-width="1.2">
+            <rect x="1" y="5" width="22" height="14" rx="2"/>
+            <circle cx="12" cy="12" r="4"/>
+            <path d="M9 5V3h6v2"/>
+          </svg>
+          <p class="camera-hint">Toca para tomar foto o subir imagen</p>
+          <img id="previewImg" class="preview-img hidden" alt="Vista previa"/>
+        </div>
+        <input type="file" id="fileInput" accept="image/*" capture="environment" class="hidden" />
+        <button type="button" class="shutter-btn" id="shutterBtn">
+          <div class="shutter-inner"></div>
+        </button>
+      </div>
+    </div>
+
+    <!-- ===== SCREEN 3: FORM ===== -->
+    <div class="app-screen" id="screen-form">
+      <div class="screen-scroll-inner">
+        <div class="form-preview-img-wrap">
+          <img id="formPreviewImg" src="" alt="Tu dibujo" class="form-preview-img" />
+        </div>
+        <div class="form-card">
+          <h2 class="form-title">Tu Obra</h2>
+          <div class="form-group">
+            <label>TÍTULO DE LA OBRA</label>
+            <input type="text" id="obraTitle" placeholder="Ej. El Mar de Leva" />
+          </div>
+          <div class="form-group">
+            <label>AUTOR</label>
+            <input type="text" id="obraAutor" placeholder="Tu nombre artístico" />
+          </div>
+          <div class="form-group">
+            <label>ESTILO ARTÍSTICO</label>
+            <div class="ai-style-card" id="aiStyleCard">
+              <span class="ai-style-kicker">IA Teachable Machine</span>
+              <strong id="aiStyleName">Analizando imagen...</strong>
+              <p id="aiStyleConfidence">El modelo elegirá el estilo automáticamente.</p>
+              <div class="ai-predictions" id="aiPredictions"></div>
+            </div>
+          </div>
+          <button type="button" class="btn btn-primary btn-full" id="btnGenerar">GENERAR ARTE</button>
+          <button type="button" class="btn btn-ghost btn-full" id="btnRetomar">TOMAR DE NUEVO</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== SCREEN 4: TRANSFORMANDO (loading) ===== -->
+    <div class="app-screen" id="screen-loading">
+      <div class="loading-inner">
+        <div class="loading-spinner"></div>
+        <h2 class="loading-title">Transformando</h2>
+        <p class="loading-dots" id="loadingDots">...</p>
+        <p class="loading-sub" id="loadingSub">Convirtiendo tu dibujo en arte</p>
+      </div>
+    </div>
+
+    <!-- ===== SCREEN 5: RESULT ===== -->
+    <div class="app-screen" id="screen-result">
+      <div class="screen-scroll-inner">
+        <div class="result-img-wrap">
+          <img id="resultImg" src="" alt="Tu obra generada" class="result-img" />
+        </div>
+        <div class="result-card">
+          <button type="button" class="btn btn-primary btn-full" id="btnGuardar">GUARDAR EN EL MUSEO</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== SCREEN 6: MUSEO GALLERY ===== -->
+    <div class="app-screen" id="screen-museo">
+      <div class="screen-header light">
+        <button type="button" class="back-btn dark" data-target="screen-home">←</button>
+        <h2>Museo Artistico</h2>
+        <span></span>
+      </div>
+      <div class="gallery-grid" id="galleryGrid">
+        <!-- Items injected by JS -->
+      </div>
+    </div>
+
+    <!-- ===== SCREEN 7: OBRA DETAIL ===== -->
+    <div class="app-screen" id="screen-detail">
+      <div class="detail-img-wrap">
+        <img id="detailImg" src="" alt="Obra" />
+      </div>
+      <div class="detail-card">
+        <button type="button" class="back-btn" data-target="screen-museo" style="margin-bottom:16px">← Volver</button>
+        <p class="detail-num" id="detailNum">OBRA GENERADA #001</p>
+        <h2 class="detail-title" id="detailTitle">Sin título</h2>
+        <p class="detail-autor" id="detailAutor">Autor: —</p>
+        <hr class="detail-sep"/>
+        <p class="detail-desc" id="detailDesc"></p>
+        <div class="similar-section">
+          <h3>Obras Similares:</h3>
+          <div class="similar-grid" id="similarGrid"></div>
+        </div>
+      </div>
+
+      <!-- BOTTOM NAV -->
+      <nav class="bottom-nav">
+        <button type="button" data-target="screen-home" class="bnav-btn">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 9.5L12 3l9 6.5V20a1 1 0 01-1 1H4a1 1 0 01-1-1V9.5z"/><path d="M9 21V12h6v9"/></svg>
+        </button>
+        <button type="button" data-target="screen-museo" class="bnav-btn active">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="1"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+        </button>
+        <button type="button" data-target="screen-detail" class="bnav-btn">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        </button>
+      </nav>
+    </div>
+
+  </div><!-- /app-wrapper -->
+
+  <script src="vendor/tf.min.js"></script>
+  <script src="vendor/teachablemachine-image.min.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

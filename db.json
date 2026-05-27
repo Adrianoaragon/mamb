@@ -1,0 +1,164 @@
+{
+  "obras": [
+    {
+      "id": 1779847289388,
+      "num": "010",
+      "title": "Sin título",
+      "autor": "Artista anónimo",
+      "style": "Pablo Picasso",
+      "url": "/uploads/obra_1779847289388.jpg",
+      "originalUrl": "/uploads/original_1779847289388.jpg",
+      "description": "La IA transformó tu imagen con formas audaces y planos expresivos, como una composición moderna llena de carácter.",
+      "tags": [
+        "cubismo",
+        "formas",
+        "moderno"
+      ],
+      "date": "26/5/2026"
+    },
+    {
+      "id": 1779825318498,
+      "num": "009",
+      "title": "cabra",
+      "autor": "riqui riqui",
+      "style": "Vincent van Gogh",
+      "url": "/uploads/obra_1779825318498.jpg",
+      "originalUrl": "/uploads/original_1779825318498.jpg",
+      "description": "La IA encontró una energía vibrante en tu dibujo y lo llevó a pinceladas intensas, cielos en movimiento y colores llenos de emoción.",
+      "tags": [
+        "postimpresionismo",
+        "pincelada",
+        "color"
+      ],
+      "date": "26/5/2026"
+    },
+    {
+      "id": 1779749867676,
+      "num": "008",
+      "title": "faafafa",
+      "autor": "Artista anónimo",
+      "style": "Leonardo da Vinci",
+      "url": "/uploads/obra_1779749867676.jpg",
+      "originalUrl": "/uploads/original_1779749867676.jpg",
+      "description": "Tu dibujo fue interpretado con una mirada renacentista: luces suaves, misterio y detalles delicados como si saliera de un taller italiano.",
+      "tags": [
+        "renacimiento",
+        "sfumato",
+        "detalle"
+      ],
+      "date": "25/5/2026"
+    },
+    {
+      "id": 1779748293014,
+      "num": "007",
+      "title": "Cabra",
+      "autor": "Ney",
+      "style": "Pablo Picasso",
+      "url": "/uploads/obra_1779748293014.jpg",
+      "originalUrl": "/uploads/original_1779748293014.jpg",
+      "description": "La IA transformó tu imagen con formas audaces y planos expresivos, como una composición moderna llena de carácter.",
+      "tags": [
+        "cubismo",
+        "formas",
+        "moderno"
+      ],
+      "date": "25/5/2026"
+    },
+    {
+      "id": 1779748057700,
+      "num": "006",
+      "title": "Lamine Yamal",
+      "autor": "Artista anónimo",
+      "style": "Leonardo da Vinci",
+      "url": "/uploads/obra_1779748057700.jpg",
+      "originalUrl": "/uploads/original_1779748057700.jpg",
+      "description": "Tu dibujo fue interpretado con una mirada renacentista: luces suaves, misterio y detalles delicados como si saliera de un taller italiano.",
+      "tags": [
+        "renacimiento",
+        "sfumato",
+        "detalle"
+      ],
+      "date": "25/5/2026"
+    },
+    {
+      "id": 1779748028543,
+      "num": "005",
+      "title": "Sin título",
+      "autor": "Artista anónimo",
+      "style": "Leonardo da Vinci",
+      "url": "/uploads/obra_1779748028543.jpg",
+      "originalUrl": "/uploads/original_1779748028543.jpg",
+      "description": "Tu dibujo fue interpretado con una mirada renacentista: luces suaves, misterio y detalles delicados como si saliera de un taller italiano.",
+      "tags": [
+        "renacimiento",
+        "sfumato",
+        "detalle"
+      ],
+      "date": "25/5/2026"
+    },
+    {
+      "id": 1779747920029,
+      "num": "004",
+      "title": "Sin título",
+      "autor": "Artista anónimo",
+      "style": "Pablo Picasso",
+      "url": "/uploads/obra_1779747920029.jpg",
+      "originalUrl": "/uploads/original_1779747920029.jpg",
+      "description": "La IA transformó tu imagen con formas audaces y planos expresivos, como una composición moderna llena de carácter.",
+      "tags": [
+        "cubismo",
+        "formas",
+        "moderno"
+      ],
+      "date": "25/5/2026"
+    },
+    {
+      "id": 1779747901926,
+      "num": "003",
+      "title": "Sin título",
+      "autor": "Artista anónimo",
+      "style": "Leonardo da Vinci",
+      "url": "/uploads/obra_1779747901926.jpg",
+      "originalUrl": "/uploads/original_1779747901926.jpg",
+      "description": "Tu dibujo fue interpretado con una mirada renacentista: luces suaves, misterio y detalles delicados como si saliera de un taller italiano.",
+      "tags": [
+        "renacimiento",
+        "sfumato",
+        "detalle"
+      ],
+      "date": "25/5/2026"
+    },
+    {
+      "id": 1779746917351,
+      "num": "002",
+      "title": "Sin título",
+      "autor": "Artista anónimo",
+      "style": "Leonardo da Vinci",
+      "url": "/uploads/obra_1779746917351.jpg",
+      "originalUrl": "/uploads/original_1779746917351.jpg",
+      "description": "Tu dibujo fue interpretado con una mirada renacentista: luces suaves, misterio y detalles delicados como si saliera de un taller italiano.",
+      "tags": [
+        "renacimiento",
+        "sfumato",
+        "detalle"
+      ],
+      "date": "25/5/2026"
+    },
+    {
+      "id": 1779746839171,
+      "num": "001",
+      "title": "Sin título",
+      "autor": "Artista anónimo",
+      "style": "Leonardo da Vinci",
+      "url": "/uploads/obra_1779746839171.jpg",
+      "originalUrl": "/uploads/original_1779746839171.jpg",
+      "description": "Tu dibujo fue interpretado con una mirada renacentista: luces suaves, misterio y detalles delicados como si saliera de un taller italiano.",
+      "tags": [
+        "renacimiento",
+        "sfumato",
+        "detalle"
+      ],
+      "date": "25/5/2026"
+    }
+  ]
+}

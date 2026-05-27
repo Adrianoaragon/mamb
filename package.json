@@ -1,0 +1,18 @@
+{
+  "name": "mamb-interactivo",
+  "version": "1.0.0",
+  "description": "Museo de Arte Moderno de Barranquilla - Sitio Web + App Interactiva para Ninos",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "keywords": [
+    "mamb",
+    "museo",
+    "barranquilla",
+    "arte",
+    "interactivo"
+  ],
+  "author": "USB - Ingenieria de Sistemas - Adriano Aragon, Sebastian Blanco, Santiago Perez, Ney Salazar",
+  "license": "MIT"
+}
