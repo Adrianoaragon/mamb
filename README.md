@@ -21,7 +21,7 @@ mamb-interactivo/
 └── README.md
 ```
 
-## Pasos para ejecutar la aplicación
+## Instrucciones para ejecutar la aplicación
 
 Abre una terminal en esta carpeta y ejecuta:
 
