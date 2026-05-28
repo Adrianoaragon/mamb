@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -8,360 +7,308 @@
   <link rel="stylesheet" href="css/style.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap"
-    rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
 </head>
-
 <body>
 
   <!-- SPLASH SCREEN -->
   <div id="splash">
     <div class="splash-icon">
-      <svg width="48" height="40" viewBox="0 0 48 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M24 2L46 12V28L24 38L2 28V12L24 2Z" stroke="#C9A84C" stroke-width="1.5" fill="none" />
-        <path d="M24 10L38 17V23L24 30L10 23V17L24 10Z" stroke="#C9A84C" stroke-width="1" fill="none" opacity="0.6" />
-        <path d="M24 18L32 22V24L24 28L16 24V22L24 18Z" fill="#C9A84C" opacity="0.4" />
+      <svg width="48" height="40" viewBox="0 0 48 40" fill="none">
+        <path d="M24 2L46 12V28L24 38L2 28V12L24 2Z" stroke="#C9A84C" stroke-width="1.5" fill="none"/>
+        <path d="M24 10L38 17V23L24 30L10 23V17L24 10Z" stroke="#C9A84C" stroke-width="1" fill="none" opacity="0.6"/>
+        <path d="M24 18L32 22V24L24 28L16 24V22L24 18Z" fill="#C9A84C" opacity="0.4"/>
       </svg>
     </div>
     <h1 class="splash-title">MAMB</h1>
     <p class="splash-sub">Museo de Arte Moderno de Barranquilla</p>
   </div>
 
-  <!-- NAVIGATION -->
-  <nav id="navbar">
-    <div class="nav-inner">
-      <a href="#" class="nav-logo">
-        <svg width="28" height="24" viewBox="0 0 48 40" fill="none">
-          <path d="M24 2L46 12V28L24 38L2 28V12L24 2Z" stroke="#C9A84C" stroke-width="2" fill="none" />
-          <path d="M24 10L38 17V23L24 30L10 23V17L24 10Z" stroke="#C9A84C" stroke-width="1.2" fill="none"
-            opacity="0.7" />
-        </svg>
-        <span>MAMB</span>
-      </a>
-      <ul class="nav-links">
-        <li><a href="#coleccion">Colección</a></li>
-        <li><a href="#artistas">Artistas</a></li>
-        <li><a href="#visita">Visita</a></li>
-        <li><a href="#info">Acerca</a></li>
-      </ul>
-      <a href="interactivo.html" class="nav-cta">Espacio Interactivo →</a>
-      <button class="burger" id="burger" aria-label="Menú">
-        <span></span><span></span><span></span>
-      </button>
-    </div>
-    <div class="mobile-menu" id="mobileMenu">
-      <a href="#coleccion">Colección</a>
-      <a href="#artistas">Artistas</a>
-      <a href="#visita">Visita</a>
-      <a href="#info">Acerca</a>
-      <a href="interactivo.html" class="mobile-cta">✦ Espacio Interactivo</a>
-    </div>
-  </nav>
+  <!-- SITE WRAPPER (se muestra tras el splash) -->
+  <div id="siteWrapper" class="hidden">
 
-  <!-- HERO -->
-  <header class="hero" id="hero">
-    <div class="hero-bg">
-      <div class="hero-grain"></div>
-      <div class="hero-orb orb-1"></div>
-      <div class="hero-orb orb-2"></div>
-      <div class="hero-lines">
-        <div class="h-line"></div>
-        <div class="h-line"></div>
-        <div class="h-line"></div>
-      </div>
-    </div>
-    <div class="hero-content">
-      <p class="hero-eyebrow">Explora el Caribe</p>
-      <h1 class="hero-title">Arte en<br /><em>cada trazo</em></h1>
-      <p class="hero-body">El santuario de arte moderno de Barranquilla. Donde la tradición caribeña encuentra la
-        vanguardia contemporánea.</p>
-      <div class="hero-actions">
-        <a href="interactivo.html" class="btn btn-primary">
-          <span>Crear mi Obra</span>
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <circle cx="12" cy="12" r="3" />
-            <path
-              d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83" />
+    <!-- NAVIGATION con pestañas -->
+    <nav id="navbar">
+      <div class="nav-inner">
+        <button type="button" class="nav-logo nav-tab-btn" data-tab="tab-inicio">
+          <svg width="28" height="24" viewBox="0 0 48 40" fill="none">
+            <path d="M24 2L46 12V28L24 38L2 28V12L24 2Z" stroke="#C9A84C" stroke-width="2" fill="none"/>
+            <path d="M24 10L38 17V23L24 30L10 23V17L24 10Z" stroke="#C9A84C" stroke-width="1.2" fill="none" opacity="0.7"/>
           </svg>
-        </a>
-        <a href="#coleccion" class="btn btn-secondary">Ver Museo</a>
+          <span>MAMB</span>
+        </button>
+        <ul class="nav-links">
+          <li><button type="button" class="nav-tab-btn active" data-tab="tab-inicio">Inicio</button></li>
+          <li><button type="button" class="nav-tab-btn" data-tab="tab-coleccion">Colección</button></li>
+          <li><button type="button" class="nav-tab-btn" data-tab="tab-artistas">Artistas</button></li>
+          <li><button type="button" class="nav-tab-btn" data-tab="tab-visita">Visita</button></li>
+          <li><button type="button" class="nav-tab-btn" data-tab="tab-acerca">Acerca</button></li>
+        </ul>
+        <a href="interactivo.html" class="nav-cta">Espacio Interactivo →</a>
+        <button class="burger" id="burger" aria-label="Menú">
+          <span></span><span></span><span></span>
+        </button>
       </div>
-    </div>
-    <div class="hero-scroll">
-      <span>Scroll</span>
-      <div class="scroll-line"></div>
-    </div>
-  </header>
-
-  <!-- STRIP -->
-  <div class="strip">
-    <div class="strip-track">
-      <span>Alejandro Obregón</span><span>✦</span>
-      <span>Cepeda Samudio</span><span>✦</span>
-      <span>Fernando Botero</span><span>✦</span>
-      <span>Enrique Grau</span><span>✦</span>
-      <span>Noé León</span><span>✦</span>
-      <span>Cruz Diez</span><span>✦</span>
-      <span>Alejandro Obregón</span><span>✦</span>
-      <span>Cepeda Samudio</span><span>✦</span>
-      <span>Fernando Botero</span><span>✦</span>
-      <span>Enrique Grau</span><span>✦</span>
-      <span>Noé León</span><span>✦</span>
-      <span>Cruz Diez</span><span>✦</span>
-    </div>
-  </div>
-
-  <!-- INTERACTIVE BANNER -->
-  <section class="interactive-banner" id="interactivo">
-    <div class="ib-inner">
-      <div class="ib-text">
-        <p class="ib-eyebrow">Espacio Interactivo para Niños</p>
-        <h2 class="ib-title">Tu dibujo<br />se convierte<br />en <em>obra de arte</em></h2>
-        <p class="ib-body">Toma una foto de tu dibujo, elige el estilo de un gran maestro del Caribe, y mira cómo la IA
-          lo transforma en una obra digna del museo.</p>
-        <a href="interactivo.html" class="btn btn-gold">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-            <rect x="3" y="3" width="18" height="18" rx="2" />
-            <circle cx="8.5" cy="8.5" r="1.5" />
-            <polyline points="21 15 16 10 5 21" />
-          </svg>
-          Entrar al Espacio Interactivo
-        </a>
+      <div class="mobile-menu" id="mobileMenu">
+        <button type="button" class="mob-tab-btn" data-tab="tab-inicio">Inicio</button>
+        <button type="button" class="mob-tab-btn" data-tab="tab-coleccion">Colección</button>
+        <button type="button" class="mob-tab-btn" data-tab="tab-artistas">Artistas</button>
+        <button type="button" class="mob-tab-btn" data-tab="tab-visita">Visita</button>
+        <button type="button" class="mob-tab-btn" data-tab="tab-acerca">Acerca</button>
+        <a href="interactivo.html" class="mobile-cta">✦ Espacio Interactivo</a>
       </div>
-      <div class="ib-visual">
-        <div class="ib-card ib-card-back">
-          <div class="ib-card-art ib-art-2"></div>
-        </div>
-        <div class="ib-card ib-card-front">
-          <div class="ib-card-art ib-art-1"></div>
-          <div class="ib-card-label">
-            <span class="ib-label-num">OBRA #024</span>
-            <span class="ib-label-title">Arrecife de Colores</span>
+    </nav>
+
+    <!-- Barra indicadora dorada debajo del navbar -->
+    <div class="tab-indicator-bar">
+      <div class="tab-indicator" id="tabIndicator"></div>
+    </div>
+
+    <!-- ===== PESTAÑA: INICIO ===== -->
+    <div class="site-tab active" id="tab-inicio">
+
+      <header class="hero">
+        <div class="hero-bg">
+          <div class="hero-grain"></div>
+          <div class="hero-orb orb-1"></div>
+          <div class="hero-orb orb-2"></div>
+          <div class="hero-lines">
+            <div class="h-line"></div><div class="h-line"></div><div class="h-line"></div>
           </div>
         </div>
-        <div class="ib-badge">
-          <div class="ib-badge-inner">
-            <span>✦</span>
-            <span>IA</span>
-            <span>Arte</span>
+        <div class="hero-content">
+          <p class="hero-eyebrow">Explora el Caribe</p>
+          <h1 class="hero-title">Arte en<br/><em>cada trazo</em></h1>
+          <p class="hero-body">El santuario de arte moderno de Barranquilla. Donde la tradición caribeña encuentra la vanguardia contemporánea.</p>
+          <div class="hero-actions">
+            <a href="interactivo.html" class="btn btn-primary">
+              <span>Crear mi Obra</span>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="3"/>
+                <path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/>
+              </svg>
+            </a>
+            <button type="button" class="btn btn-secondary nav-tab-btn" data-tab="tab-coleccion">Ver Museo</button>
           </div>
         </div>
-      </div>
-    </div>
-  </section>
+        <div class="hero-scroll">
+          <span>Scroll</span>
+          <div class="scroll-line"></div>
+        </div>
+      </header>
 
-  <!-- COLECCIÓN -->
-  <section class="collection" id="coleccion">
-    <div class="section-header">
-      <p class="section-eyebrow">Nuestra Colección</p>
-      <h2 class="section-title">Más de 500 obras<br />de arte latinoamericano</h2>
-    </div>
-    <div class="collection-grid">
-      <div class="col-item col-item--large">
-        <div class="col-img" style="background: linear-gradient(135deg, #1a3a2a 0%, #2d6b4a 40%, #1a3a2a 100%);">
-          <div class="col-texture t1"></div>
-        </div>
-        <div class="col-info">
-          <span class="col-tag">Pintura · Caribe</span>
-          <h3>Cosas del Aire</h3>
-          <p>Alejandro Obregón</p>
-        </div>
-      </div>
-      <div class="col-item">
-        <div class="col-img" style="background: linear-gradient(160deg, #2a1a3a 0%, #6b2d6b 50%, #2a1a3a 100%);">
-          <div class="col-texture t2"></div>
-        </div>
-        <div class="col-info">
-          <span class="col-tag">Escultura</span>
-          <h3>Forma Orgánica</h3>
-          <p>Enrique Grau</p>
+      <div class="strip">
+        <div class="strip-track">
+          <span>Alejandro Obregón</span><span>✦</span>
+          <span>Cepeda Samudio</span><span>✦</span>
+          <span>Fernando Botero</span><span>✦</span>
+          <span>Enrique Grau</span><span>✦</span>
+          <span>Noé León</span><span>✦</span>
+          <span>Cruz Diez</span><span>✦</span>
+          <span>Alejandro Obregón</span><span>✦</span>
+          <span>Cepeda Samudio</span><span>✦</span>
+          <span>Fernando Botero</span><span>✦</span>
+          <span>Enrique Grau</span><span>✦</span>
+          <span>Noé León</span><span>✦</span>
+          <span>Cruz Diez</span><span>✦</span>
         </div>
       </div>
-      <div class="col-item">
-        <div class="col-img" style="background: linear-gradient(135deg, #1a2a3a 0%, #2d4a6b 50%, #1a2a3a 100%);">
-          <div class="col-texture t3"></div>
-        </div>
-        <div class="col-info">
-          <span class="col-tag">Arte Pop · Colombia</span>
-          <h3>El Río Grande</h3>
-          <p>Noé León</p>
-        </div>
-      </div>
-      <div class="col-item">
-        <div class="col-img" style="background: linear-gradient(135deg, #3a2a1a 0%, #6b4a2d 50%, #3a2a1a 100%);">
-          <div class="col-texture t4"></div>
-        </div>
-        <div class="col-info">
-          <span class="col-tag">Cinética · Venezuela</span>
-          <h3>Physichromie</h3>
-          <p>Carlos Cruz-Diez</p>
-        </div>
-      </div>
-    </div>
-  </section>
 
-  <!-- ARTISTAS -->
-  <section class="artists" id="artistas">
-    <div class="section-header light">
-      <p class="section-eyebrow">Grandes Maestros</p>
-      <h2 class="section-title">El arte caribeño<br />que marcó historia</h2>
-    </div>
-    <div class="artists-grid">
-      <div class="artist-card">
-        <div class="artist-portrait a1" style="background-image: url('images/alejandro_obregon.jpg'); background-size: cover; background-position: center;"></div>
-        <div class="artist-info">
-          <h3>Alejandro Obregón</h3>
-          <p class="artist-dates">1920 – 1992</p>
-          <p class="artist-bio">El maestro del expresionismo caribeño. Fundador de la identidad visual del arte
-            colombiano moderno.</p>
-          <span class="artist-tag">Pintura · Expresionismo</span>
+      <section class="interactive-banner">
+        <div class="ib-inner">
+          <div class="ib-text">
+            <p class="ib-eyebrow">Espacio Interactivo para Niños</p>
+            <h2 class="ib-title">Tu dibujo<br/>se convierte<br/>en <em>obra de arte</em></h2>
+            <p class="ib-body">Toma una foto de tu dibujo, elige el estilo de un gran maestro del Caribe, y mira cómo la IA lo transforma en una obra digna del museo.</p>
+            <a href="interactivo.html" class="btn btn-gold">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <rect x="3" y="3" width="18" height="18" rx="2"/>
+                <circle cx="8.5" cy="8.5" r="1.5"/>
+                <polyline points="21 15 16 10 5 21"/>
+              </svg>
+              Entrar al Espacio Interactivo
+            </a>
+          </div>
+          <div class="ib-visual">
+            <div class="ib-card ib-card-back"><div class="ib-card-art ib-art-2"></div></div>
+            <div class="ib-card ib-card-front">
+              <div class="ib-card-art ib-art-1"></div>
+              <div class="ib-card-label">
+                <span class="ib-label-num">OBRA #024</span>
+                <span class="ib-label-title">Arrecife de Colores</span>
+              </div>
+            </div>
+            <div class="ib-badge"><div class="ib-badge-inner"><span>✦</span><span>IA</span><span>Arte</span></div></div>
+          </div>
         </div>
-      </div>
-      <div class="artist-card">
-        <div class="artist-portrait a2" style="background-image: url('images/cepeda_samudio.jpg'); background-size: cover; background-position: center;"></div>
-        <div class="artist-info">
-          <h3>Cepeda Samudio</h3>
-          <p class="artist-dates">1926 – 1972</p>
-          <p class="artist-bio">Innovador del realismo mágico y el cine. Su obra "La casa grande" transformó la
-            narrativa colombiana.</p>
-          <span class="artist-tag">Literatura · Cine</span>
-        </div>
-      </div>
-      <div class="artist-card">
-        <div class="artist-portrait a3" style="background-image: url('images/noe_leon.jpg'); background-size: cover; background-position: center;"></div>
-        <div class="artist-info">
-          <h3>Noé León</h3>
-          <p class="artist-dates">1907 – 1978</p>
-          <p class="artist-bio">El pintor naif más celebrado del Caribe colombiano. Colores vivos y escenas del pueblo
-            barranquillero.</p>
-          <span class="artist-tag">Pintura Naif · Popular</span>
-        </div>
-      </div>
-    </div>
-  </section>
+      </section>
 
-  <!-- VISITA -->
-  <section class="visit" id="visita">
-    <div class="visit-inner">
-      <div class="visit-text">
-        <p class="section-eyebrow">Planea tu Visita</p>
-        <h2 class="section-title">Un santuario de<br />arte moderno en<br /><em>Barranquilla</em></h2>
-        <div class="visit-details">
-          <div class="visit-item">
-            <span class="visit-icon">◷</span>
-            <div>
-              <strong>Horarios</strong>
-              <p>Mar – Vie: 10:00 am – 7:00 pm<br />Sábados: 10:00 am – 1:00 pm<br />Dom y Festivos: Cerrado</p>
+      <section class="final-cta">
+        <div class="fct-inner">
+          <p class="section-eyebrow">Para los más pequeños</p>
+          <h2>¿Listo para crear<br/>tu <em>obra maestra</em>?</h2>
+          <p>Transforma tu dibujo en arte con la inteligencia artificial. Sin registro, sin complicaciones. Solo creatividad.</p>
+          <a href="interactivo.html" class="btn btn-primary btn-large">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+              <rect x="3" y="3" width="18" height="18" rx="2"/>
+              <circle cx="8.5" cy="8.5" r="1.5"/>
+              <polyline points="21 15 16 10 5 21"/>
+            </svg>
+            Entrar al Espacio Interactivo
+          </a>
+        </div>
+      </section>
+
+    </div><!-- /tab-inicio -->
+
+    <!-- ===== PESTAÑA: COLECCIÓN ===== -->
+    <div class="site-tab" id="tab-coleccion">
+      <section class="collection tab-page-section">
+        <div class="section-header">
+          <p class="section-eyebrow">Nuestra Colección</p>
+          <h2 class="section-title">Más de 500 obras<br/>de arte latinoamericano</h2>
+        </div>
+        <div class="collection-grid">
+          <div class="col-item col-item--large">
+            <div class="col-img" style="background: linear-gradient(135deg, #1a3a2a 0%, #2d6b4a 40%, #1a3a2a 100%);"><div class="col-texture t1"></div></div>
+            <div class="col-info"><span class="col-tag">Pintura · Caribe</span><h3>Cosas del Aire</h3><p>Alejandro Obregón</p></div>
+          </div>
+          <div class="col-item">
+            <div class="col-img" style="background: linear-gradient(160deg, #2a1a3a 0%, #6b2d6b 50%, #2a1a3a 100%);"><div class="col-texture t2"></div></div>
+            <div class="col-info"><span class="col-tag">Escultura</span><h3>Forma Orgánica</h3><p>Enrique Grau</p></div>
+          </div>
+          <div class="col-item">
+            <div class="col-img" style="background: linear-gradient(135deg, #1a2a3a 0%, #2d4a6b 50%, #1a2a3a 100%);"><div class="col-texture t3"></div></div>
+            <div class="col-info"><span class="col-tag">Arte Pop · Colombia</span><h3>El Río Grande</h3><p>Noé León</p></div>
+          </div>
+          <div class="col-item">
+            <div class="col-img" style="background: linear-gradient(135deg, #3a2a1a 0%, #6b4a2d 50%, #3a2a1a 100%);"><div class="col-texture t4"></div></div>
+            <div class="col-info"><span class="col-tag">Cinética · Venezuela</span><h3>Physichromie</h3><p>Carlos Cruz-Diez</p></div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- ===== PESTAÑA: ARTISTAS ===== -->
+    <div class="site-tab" id="tab-artistas">
+      <section class="artists tab-page-section">
+        <div class="section-header light">
+          <p class="section-eyebrow">Grandes Maestros</p>
+          <h2 class="section-title">El arte caribeño<br/>que marcó historia</h2>
+        </div>
+        <div class="artists-grid">
+          <div class="artist-card">
+            <div class="artist-portrait a1" style="background-image: url('images/alejandro_obregon.jpg'); background-size: cover; background-position: center;"></div>
+            <div class="artist-info">
+              <h3>Alejandro Obregón</h3>
+              <p class="artist-dates">1920 – 1992</p>
+              <p class="artist-bio">El maestro del expresionismo caribeño. Fundador de la identidad visual del arte colombiano moderno.</p>
+              <span class="artist-tag">Pintura · Expresionismo</span>
             </div>
           </div>
-          <div class="visit-item">
-            <span class="visit-icon">◎</span>
-            <div>
-              <strong>Ubicación</strong>
-              <p>Sede<br />Cl. 76 #54-11<br />Barranquilla, Atlántico</p>
+          <div class="artist-card">
+            <div class="artist-portrait a2" style="background-image: url('images/cepeda_samudio.jpg'); background-size: cover; background-position: center;"></div>
+            <div class="artist-info">
+              <h3>Cepeda Samudio</h3>
+              <p class="artist-dates">1926 – 1972</p>
+              <p class="artist-bio">Innovador del realismo mágico y el cine. Su obra "La casa grande" transformó la narrativa colombiana.</p>
+              <span class="artist-tag">Literatura · Cine</span>
             </div>
           </div>
-          <div class="visit-item">
-            <span class="visit-icon">✉</span>
-            <div>
-              <strong>Contacto</strong>
-              <p>Tel: +57 322 527 5408</p>
+          <div class="artist-card">
+            <div class="artist-portrait a3" style="background-image: url('images/noe_leon.jpg'); background-size: cover; background-position: center;"></div>
+            <div class="artist-info">
+              <h3>Noé León</h3>
+              <p class="artist-dates">1907 – 1978</p>
+              <p class="artist-bio">El pintor naif más celebrado del Caribe colombiano. Colores vivos y escenas del pueblo barranquillero.</p>
+              <span class="artist-tag">Pintura Naif · Popular</span>
             </div>
           </div>
         </div>
-      </div>
-      <div class="visit-map">
-          <div class="map-embed">
-            <iframe
-              title="Mapa — Museo de Arte Moderno de Barranquilla"
-              src="https://www.google.com/maps?q=Museo%20de%20Arte%20Moderno%20de%20Barranquilla&z=15&output=embed"
-              width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
-          </div>
-      </div>
+      </section>
     </div>
-  </section>
 
-  <!-- ABOUT / INFO -->
-  <section class="about" id="info">
+    <!-- ===== PESTAÑA: VISITA ===== -->
+    <div class="site-tab" id="tab-visita">
+      <section class="visit tab-page-section">
+        <div class="visit-inner">
+          <div class="visit-text">
+            <p class="section-eyebrow">Planea tu Visita</p>
+            <h2 class="section-title">Un santuario de<br/>arte moderno en<br/><em>Barranquilla</em></h2>
+            <div class="visit-details">
+              <div class="visit-item">
+                <span class="visit-icon">◷</span>
+                <div>
+                  <strong>Horarios</strong>
+                  <p>Mar – Vie: 10:00 am – 7:00 pm<br/>Sábados: 10:00 am – 1:00 pm<br/>Dom y Festivos: Cerrado</p>
+                </div>
+              </div>
+              <div class="visit-item">
+                <span class="visit-icon">◎</span>
+                <div>
+                  <strong>Ubicación</strong>
+                  <p>Sede<br/>Cl. 76 #54-11<br/>Barranquilla, Atlántico</p>
+                </div>
+              </div>
+              <div class="visit-item">
+                <span class="visit-icon">✉</span>
+                <div>
+                  <strong>Contacto</strong>
+                  <p>Tel: +57 322 527 5408</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="visit-map">
+            <div class="map-embed">
+              <iframe
+                title="Mapa — Museo de Arte Moderno de Barranquilla"
+                src="https://www.google.com/maps?q=Museo%20de%20Arte%20Moderno%20de%20Barranquilla&z=15&output=embed"
+                width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+<!-- ===== PESTAÑA: ACERCA ===== -->
+<div class="site-tab" id="tab-acerca">
+  <section class="about tab-page-section">
     <div class="about-inner">
-      <div class="about-tabs">
-        <button class="tab-btn active" data-tab="artista">Artista</button>
-        <button class="tab-btn" data-tab="museo">Museo</button>
-        <button class="tab-btn" data-tab="programa">Programa</button>
-      </div>
-      <div class="tab-content" id="tabContent">
-        <div class="tab-pane active" id="tab-artista">
-          <h2>Cepeda Samudio</h2>
-          <p class="tab-lead">Innovador del realismo mágico y el cine.</p>
-          <p>Su obra "La casa grande" cambió la narrativa colombiana para siempre. Fue miembro fundamental del "Grupo de
-            Barranquilla" junto a Gabriel García Márquez. Su narrativa se caracteriza por fragmentar el tiempo y usar
-            técnicas cinematográficas en la escritura.</p>
-        </div>
-        <div class="tab-pane" id="tab-museo">
-          <h2>Espacio MAMB</h2>
-          <p class="tab-lead">Un santuario de arte moderno en Barranquilla.</p>
-          <p>Un lugar donde la tradición se encuentra con la tecnología digital. El museo no solo expone cuadros, sino
-            que preserva el legado de figuras multidisciplinarias. Este proyecto permite que cualquier persona en
-            Colombia, sin importar su formación técnica, pueda interactuar con la estética de los grandes maestros desde
-            su celular.</p>
-        </div>
-        <div class="tab-pane" id="tab-programa">
+      <div class="tab-content">
+        <div class="tab-pane active">
           <h2>Ingeniería de Sistemas</h2>
           <p class="tab-lead">Universidad Simón Bolívar – USB</p>
-          <p>Dentro de la Facultad de Ingeniería, el desarrollo de esta aplicación móvil ha sido liderado por
-            estudiantes comprometidos con la transformación digital: Adriano Aragón, Sebastian Blanco, Santiago Perez y
-            Ney Salazar.</p>
-          <p>El curso de Tecnologías Web en Ingeniería de Sistemas de la USB es el espacio académico donde se gestan
-            proyectos como MAMB.</p>
+          <p>Dentro de la Facultad de Ingeniería, el desarrollo de esta aplicación móvil ha sido liderado por estudiantes comprometidos con la transformación digital: Adriano Aragón, Sebastian Blanco, Santiago Perez y Ney Salazar.</p>
+          <p>El curso de Tecnologías Web en Ingeniería de Sistemas de la USB es el espacio académico donde se gestan proyectos como MAMB.</p>
         </div>
       </div>
     </div>
   </section>
+</div>
 
-  <!-- CTA FINAL -->
-  <section class="final-cta">
-    <div class="fct-inner">
-      <p class="section-eyebrow">Para los más pequeños</p>
-      <h2>¿Listo para crear<br />tu <em>obra maestra</em>?</h2>
-      <p>Transforma tu dibujo en arte con la inteligencia artificial. Sin registro, sin complicaciones. Solo
-        creatividad.</p>
-      <a href="interactivo.html" class="btn btn-primary btn-large">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-          <rect x="3" y="3" width="18" height="18" rx="2" />
-          <circle cx="8.5" cy="8.5" r="1.5" />
-          <polyline points="21 15 16 10 5 21" />
-        </svg>
-        Entrar al Espacio Interactivo
-      </a>
-    </div>
-  </section>
-
-  <!-- FOOTER -->
-  <footer class="footer">
-    <div class="footer-inner">
-      <div class="footer-brand">
-        <svg width="32" height="27" viewBox="0 0 48 40" fill="none">
-          <path d="M24 2L46 12V28L24 38L2 28V12L24 2Z" stroke="#C9A84C" stroke-width="2" fill="none" />
-          <path d="M24 10L38 17V23L24 30L10 23V17L24 10Z" stroke="#C9A84C" stroke-width="1.2" fill="none"
-            opacity="0.7" />
-        </svg>
-        <div>
-          <strong>MAMB</strong>
-          <p>Museo de Arte Moderno de Barranquilla</p>
+    <!-- FOOTER -->
+    <footer class="footer">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <svg width="32" height="27" viewBox="0 0 48 40" fill="none">
+            <path d="M24 2L46 12V28L24 38L2 28V12L24 2Z" stroke="#C9A84C" stroke-width="2" fill="none"/>
+            <path d="M24 10L38 17V23L24 30L10 23V17L24 10Z" stroke="#C9A84C" stroke-width="1.2" fill="none" opacity="0.7"/>
+          </svg>
+          <div><strong>MAMB</strong><p>Museo de Arte Moderno de Barranquilla</p></div>
         </div>
+        <div class="footer-links">
+          <button type="button" class="footer-tab-btn" data-tab="tab-coleccion">Colección</button>
+          <button type="button" class="footer-tab-btn" data-tab="tab-artistas">Artistas</button>
+          <button type="button" class="footer-tab-btn" data-tab="tab-visita">Visita</button>
+          <a href="interactivo.html">Espacio Interactivo</a>
+        </div>
+        <p class="footer-copy">© 2025 MAMB · Universidad Simón Bolívar · Proyecto MAMB</p>
       </div>
-      <div class="footer-links">
-        <a href="#coleccion">Colección</a>
-        <a href="#artistas">Artistas</a>
-        <a href="#visita">Visita</a>
-        <a href="interactivo.html">Espacio Interactivo</a>
-      </div>
-      <p class="footer-copy">© 2025 MAMB · Universidad Simón Bolívar · Proyecto MAMB</p>
-    </div>
-  </footer>
+    </footer>
+
+  </div><!-- /siteWrapper -->
 
   <script src="js/app.js"></script>
 </body>
-
 </html>
