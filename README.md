@@ -9,6 +9,7 @@ Ingenieria de Sistemas - Tecnologias Web
 mamb-interactivo/
 ├── public/
 │   ├── css/style.css
+│   ├── images                    Imagenes de los diferentes artistas
 │   ├── js/app.js
 │   ├── my_model/                 Modelo local de Teachable Machine
 │   ├── vendor/                   Librerias locales de TensorFlow/Teachable Machine
