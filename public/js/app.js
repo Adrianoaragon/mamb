@@ -113,7 +113,7 @@ function initScrollReveal() {
    ══════════════════════════════════════════════════ */
 
 const state = {
-  currentImage: null, resultImage: null,
+  currentImage: null,
   currentTitle: '', currentAutor: '',
   currentStyle: 'Vincent van Gogh',
   aiPrediction: null, aiPredictions: [],
@@ -124,26 +124,39 @@ const state = {
 const TM_MODEL_URL = './my_model/';
 let tmModel = null, tmModelPromise = null;
 
-const ARTIST_STYLES = {
+/* Información de cada artista detectado por el modelo */
+const ARTIST_INFO = {
   'Leonardo da Vinci': {
-    palette: ['#2d2a22','#75664a','#bfa36a','#e6d6a6','#5d6b57','#2f4c46','#14120f'],
-    description: 'Tu dibujo fue interpretado con una mirada renacentista: luces suaves, misterio y detalles delicados como si saliera de un taller italiano.',
-    tags: ['renacimiento','sfumato','detalle'],
+    emoji: '🎨',
+    periodo: 'Renacimiento (s. XV–XVI)',
+    descripcion: 'Maestro del sfumato y la perspectiva. Sus obras combinan arte y ciencia con una precisión sin igual.',
+    color: '#75664a',
+    colorBg: 'linear-gradient(135deg, #2d2a22, #5d4e37)',
+    tags: ['renacimiento', 'sfumato', 'detalle'],
   },
   'Vincent van Gogh': {
-    palette: ['#173f8a','#1f6fb2','#f2c84b','#f08a24','#2d8a5a','#111f4a','#fff1a8'],
-    description: 'La IA encontró una energía vibrante en tu dibujo y lo llevó a pinceladas intensas, cielos en movimiento y colores llenos de emoción.',
-    tags: ['postimpresionismo','pincelada','color'],
+    emoji: '🌻',
+    periodo: 'Postimpresionismo (s. XIX)',
+    descripcion: 'Pinceladas vibrantes y colores expresivos que transmiten emoción pura. Uno de los artistas más influyentes de la historia.',
+    color: '#f2c84b',
+    colorBg: 'linear-gradient(135deg, #173f8a, #1f6fb2)',
+    tags: ['postimpresionismo', 'pincelada', 'color'],
   },
   'Diego Velázquez': {
-    palette: ['#2b211c','#5a3b2e','#8c6847','#c7a06a','#ded2bd','#1a1a1a','#6f2632'],
-    description: 'Tu obra toma un aire clásico y teatral: sombras profundas, tonos cálidos y una presencia digna de retrato de museo.',
-    tags: ['barroco','retrato','luz'],
+    emoji: '👑',
+    periodo: 'Barroco (s. XVII)',
+    descripcion: 'Maestro del retrato y la luz. Su técnica realista y teatral lo convierte en el pintor más importante del Siglo de Oro español.',
+    color: '#c7a06a',
+    colorBg: 'linear-gradient(135deg, #2b211c, #5a3b2e)',
+    tags: ['barroco', 'retrato', 'luz'],
   },
   'Pablo Picasso': {
-    palette: ['#202c5a','#d94b3d','#f0c94a','#2f9f8f','#f4eee2','#1c1c1c','#8b5fbf'],
-    description: 'La IA transformó tu imagen con formas audaces y planos expresivos, como una composición moderna llena de carácter.',
-    tags: ['cubismo','formas','moderno'],
+    emoji: '🟦',
+    periodo: 'Cubismo (s. XX)',
+    descripcion: 'Revolucionó el arte con formas geométricas y perspectivas múltiples. Cofundador del cubismo y figura central del arte moderno.',
+    color: '#f0c94a',
+    colorBg: 'linear-gradient(135deg, #202c5a, #d94b3d)',
+    tags: ['cubismo', 'formas', 'moderno'],
   },
 };
 
@@ -204,7 +217,9 @@ async function classifyCurrentImage() {
     const predictions = await model.predict(img);
     const ordered = predictions.sort((a, b) => b.probability - a.probability);
     const best = ordered[0];
-    state.aiPrediction = best; state.aiPredictions = ordered; state.currentStyle = best.className;
+    state.aiPrediction = best;
+    state.aiPredictions = ordered;
+    state.currentStyle = best.className;
     setAiStatus(best.className, `Confianza del modelo: ${Math.round(best.probability * 100)}%.`, ordered);
     return best;
   } catch (err) {
@@ -218,7 +233,9 @@ async function classifyCurrentImage() {
 function loadImageElement(src) {
   return new Promise((resolve, reject) => {
     const img = new Image();
-    img.onload = () => resolve(img); img.onerror = reject; img.src = src;
+    img.onload = () => resolve(img);
+    img.onerror = reject;
+    img.src = src;
   });
 }
 
@@ -240,7 +257,7 @@ function resetCameraScreen() {
   const cameraHint = $('#cameraHint');
   const previewImg = $('#previewImg');
   const icon = $('.camera-icon');
-  
+
   if (videoEl) videoEl.classList.add('hidden');
   if (icon) icon.classList.remove('hidden');
   if (previewImg) previewImg.classList.add('hidden');
@@ -255,13 +272,12 @@ async function startCameraCapture() {
   const videoEl = $('#cameraVideo');
   const cameraHint = $('#cameraHint');
   const icon = $('.camera-icon');
-  
+
   try {
     cameraStream = await navigator.mediaDevices.getUserMedia({
       video: { facingMode: 'environment', width: { ideal: 1280 }, height: { ideal: 720 } },
       audio: false
     });
-    
     if (videoEl) {
       videoEl.srcObject = cameraStream;
       videoEl.classList.remove('hidden');
@@ -280,15 +296,11 @@ async function startCameraCapture() {
 function capturePhotoFromVideo() {
   const videoEl = $('#cameraVideo');
   const canvas = $('#cameraCanvas');
-  
   if (!videoEl || !canvas) return null;
-  
   canvas.width = videoEl.videoWidth;
   canvas.height = videoEl.videoHeight;
-  
   const ctx = canvas.getContext('2d');
   if (!ctx) return null;
-  
   ctx.drawImage(videoEl, 0, 0);
   closeCameraStream();
   return canvas.toDataURL('image/jpeg', 0.85);
@@ -300,14 +312,10 @@ function initCamera() {
   const btnCancelCamera = $('#btnCancelCamera');
   const shutterBtn = $('#shutterBtn');
   const fileInput = $('#fileInput');
-  
-  // Botón para tomar foto
+
   btnTakePhoto?.addEventListener('click', startCameraCapture);
-  
-  // Botón para cancelar captura de cámara
   btnCancelCamera?.addEventListener('click', resetCameraScreen);
-  
-  // Botón para disparar la cámara
+
   shutterBtn?.addEventListener('click', () => {
     const photoData = capturePhotoFromVideo();
     if (photoData) {
@@ -317,22 +325,18 @@ function initCamera() {
         previewImg.src = photoData;
         previewImg.classList.remove('hidden');
       }
-      // Esperar a que se renderice la imagen antes de ir al form
       setTimeout(() => {
         goToForm();
         classifyCurrentImage();
       }, 100);
     }
   });
-  
-  // Botón para subir imagen
+
   btnUploadImage?.addEventListener('click', () => fileInput?.click());
-  
-  // File input para subir archivos
+
   fileInput?.addEventListener('change', (e) => {
     const file = e.target.files?.[0];
     if (!file) return;
-    
     const reader = new FileReader();
     reader.onload = async (ev) => {
       state.currentImage = ev.target.result;
@@ -345,15 +349,11 @@ function initCamera() {
       await classifyCurrentImage();
     };
     reader.readAsDataURL(file);
-    // Reset file input para poder seleccionar el mismo archivo otra vez
     fileInput.value = '';
   });
-  
-  // Limpiar cámara cuando se abandone la pantalla
+
   document.addEventListener('visibilitychange', () => {
-    if (document.hidden && !$('#screen-camera.active')) {
-      closeCameraStream();
-    }
+    if (document.hidden && !$('#screen-camera.active')) closeCameraStream();
   });
 }
 
@@ -365,46 +365,52 @@ function goToForm() {
   showScreen('screen-form');
 }
 
-function initStyleChips() {
-  $$('.style-chip').forEach(chip => {
-    chip.addEventListener('click', () => {
-      $$('.style-chip').forEach(c => c.classList.remove('active'));
-      chip.classList.add('active');
-      state.currentStyle = chip.dataset.style;
-    });
-  });
-}
-
 function initFormButtons() {
-  $('#btnCrear')?.addEventListener('click', () => { sessionStorage.setItem('mambLastScreen','screen-camera'); showScreen('screen-camera'); });
+  $('#btnCrear')?.addEventListener('click', () => { sessionStorage.setItem('mambLastScreen', 'screen-camera'); showScreen('screen-camera'); });
   $('#btnMuseo')?.addEventListener('click', showMuseumScreen);
-  $('#btnRetomar')?.addEventListener('click', () => { sessionStorage.setItem('mambLastScreen','screen-camera'); showScreen('screen-camera'); });
+  $('#btnRetomar')?.addEventListener('click', () => { sessionStorage.setItem('mambLastScreen', 'screen-camera'); showScreen('screen-camera'); });
   $('#btnGenerar')?.addEventListener('click', handleGenerate);
   $('#btnGuardar')?.addEventListener('click', handleSave);
 }
 
-/* ── GENERATION ── */
-const LOADING_MESSAGES = ['Analizando tu dibujo...','Aplicando el estilo del maestro...','Pintando con inteligencia artificial...','Casi lista tu obra...'];
+/* ── GENERATION — muestra resultado de clasificación ── */
+const LOADING_MESSAGES = [
+  'Analizando tu imagen...',
+  'Consultando el modelo de IA...',
+  'Identificando al artista...',
+  'Calculando la confianza...',
+];
 
 async function handleGenerate() {
   const title = $('#obraTitle')?.value.trim() || 'Sin título';
   const autor = $('#obraAutor')?.value.trim() || 'Artista anónimo';
-  state.currentTitle = title; state.currentAutor = autor;
+  state.currentTitle = title;
+  state.currentAutor = autor;
+
   if (!state.currentImage) { alert('Por favor toma o sube una foto primero.'); return; }
+
   showScreen('screen-loading');
   animateLoadingMessages();
+
   try {
-    const prediction = state.aiPrediction || await classifyCurrentImage();
-    const style = prediction?.className || state.currentStyle;
-    const styleInfo = ARTIST_STYLES[style] || ARTIST_STYLES['Vincent van Gogh'];
-    state.currentStyle = style; state.resultDescription = styleInfo.description; state.resultTags = styleInfo.tags;
-    state.resultImage = await generateArtCanvas(style);
-    showResultScreen();
+    /* Si ya se clasificó al entrar al formulario, usar ese resultado.
+       Si no (raro), clasificar ahora. */
+    const prediction = state.aiPrediction && state.aiPrediction.probability > 0
+      ? state.aiPrediction
+      : await classifyCurrentImage();
+
+    const artistName  = prediction?.className || state.currentStyle;
+    const confidence  = prediction ? Math.round(prediction.probability * 100) : 0;
+    const artistInfo  = ARTIST_INFO[artistName] || ARTIST_INFO['Vincent van Gogh'];
+
+    state.currentStyle      = artistName;
+    state.resultDescription = artistInfo.descripcion;
+    state.resultTags        = artistInfo.tags;
+
+    showResultScreen(artistName, confidence, artistInfo);
   } catch (err) {
     console.error('Generate error:', err);
-    state.resultImage = await generateArtCanvas(state.currentStyle);
-    state.resultDescription = '¡Tu obra está lista para el museo!'; state.resultTags = ['arte','creatividad'];
-    showResultScreen();
+    showResultScreen(state.currentStyle, 0, ARTIST_INFO[state.currentStyle] || ARTIST_INFO['Vincent van Gogh']);
   }
 }
 
@@ -419,53 +425,35 @@ function animateLoadingMessages() {
   }, 900);
 }
 
-async function generateArtCanvas(style) {
-  const canvas = document.createElement('canvas');
-  canvas.width = 800; canvas.height = 1000;
-  const ctx = canvas.getContext('2d');
-  const pal = (ARTIST_STYLES[style] || ARTIST_STYLES['Vincent van Gogh']).palette;
-  const bg = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
-  bg.addColorStop(0, pal[0]); bg.addColorStop(0.5, pal[1]); bg.addColorStop(1, pal[2]);
-  ctx.fillStyle = bg; ctx.fillRect(0, 0, canvas.width, canvas.height);
-  for (let i = 0; i < 120; i++) {
-    const x = Math.random()*canvas.width, y = Math.random()*canvas.height, r = 20+Math.random()*120;
-    const color = pal[Math.floor(Math.random()*pal.length)];
-    const grad = ctx.createRadialGradient(x,y,0,x,y,r);
-    grad.addColorStop(0, color+'aa'); grad.addColorStop(1, 'transparent');
-    ctx.fillStyle = grad; ctx.beginPath();
-    ctx.ellipse(x,y,r,r*(0.4+Math.random()*0.6),Math.random()*Math.PI,0,Math.PI*2); ctx.fill();
-  }
-  for (let i = 0; i < 40; i++) {
-    const x1=Math.random()*canvas.width, y1=Math.random()*canvas.height;
-    const x2=x1+(Math.random()-.5)*200, y2=y1+(Math.random()-.5)*200;
-    ctx.strokeStyle = pal[Math.floor(Math.random()*pal.length)]+'88';
-    ctx.lineWidth = 3+Math.random()*18; ctx.lineCap = 'round';
-    ctx.beginPath(); ctx.moveTo(x1,y1);
-    ctx.bezierCurveTo(x1+Math.random()*100-50,y1+Math.random()*100,x2+Math.random()*100-50,y2+Math.random()*100,x2,y2);
-    ctx.stroke();
-  }
-  if (state.currentImage) {
-    const img = await loadImageElement(state.currentImage);
-    ctx.globalAlpha = 0.4; ctx.globalCompositeOperation = 'overlay';
-    ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-    ctx.globalAlpha = 1; ctx.globalCompositeOperation = 'source-over';
-  }
-  ctx.fillStyle = 'rgba(245,240,232,0.9)';
-  ctx.fillRect(44, canvas.height-148, canvas.width-88, 92);
-  ctx.fillStyle = '#12102A'; ctx.font = 'bold 34px Georgia,serif';
-  ctx.fillText(style, 72, canvas.height-102);
-  ctx.font = '22px sans-serif';
-  ctx.fillText(`IA Teachable Machine: ${state.aiPrediction ? Math.round(state.aiPrediction.probability*100) : 0}%`, 72, canvas.height-70);
-  const frame = ctx.createLinearGradient(0,0,canvas.width,0);
-  frame.addColorStop(0,'rgba(201,168,76,0.6)'); frame.addColorStop(0.05,'rgba(201,168,76,0)');
-  frame.addColorStop(0.95,'rgba(201,168,76,0)'); frame.addColorStop(1,'rgba(201,168,76,0.6)');
-  ctx.fillStyle = frame; ctx.fillRect(0,0,canvas.width,canvas.height);
-  return canvas.toDataURL('image/jpeg', 0.92);
-}
-
-function showResultScreen() {
+/* ── PANTALLA DE RESULTADO: muestra imagen original + etiqueta del artista ── */
+function showResultScreen(artistName, confidence, artistInfo) {
+  /* Imagen original del usuario (no una transformación) */
   const resultImg = $('#resultImg');
-  if (resultImg && state.resultImage) resultImg.src = state.resultImage;
+  if (resultImg && state.currentImage) {
+    resultImg.src = state.currentImage;
+  }
+
+  /* Barra de confianza de todas las predicciones */
+  const predList = $('#resultPredictions');
+  if (predList && state.aiPredictions.length > 0) {
+    predList.innerHTML = state.aiPredictions.map(p => {
+      const pct  = Math.round(p.probability * 100);
+      const info = ARTIST_INFO[p.className] || {};
+      const isTop = p.className === artistName;
+      return `
+        <div class="result-pred-row ${isTop ? 'result-pred-top' : ''}">
+          <span class="result-pred-name">${p.className}</span>
+          <div class="result-pred-bar-wrap">
+            <div class="result-pred-bar" style="width:${pct}%; background:${info.color || '#aaa'}"></div>
+          </div>
+          <span class="result-pred-pct">${pct}%</span>
+        </div>`;
+    }).join('');
+  }
+
+  /* Guardamos currentImage como "imagen resultado" para la galería */
+  state.resultImage = state.currentImage;
+
   showScreen('screen-result');
 }
 
@@ -478,9 +466,13 @@ async function handleSave() {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        title: state.currentTitle, autor: state.currentAutor, style: state.currentStyle,
-        generatedImage: state.resultImage, originalImage: state.currentImage,
-        description: state.resultDescription, tags: state.resultTags,
+        title: state.currentTitle,
+        autor: state.currentAutor,
+        style: state.currentStyle,
+        generatedImage: state.resultImage,
+        originalImage: state.currentImage,
+        description: state.resultDescription,
+        tags: state.resultTags,
       }),
     });
     if (!res.ok) throw new Error('Server error');
@@ -493,7 +485,7 @@ async function handleSave() {
   }
 }
 
-/* ── GALLERY — descripciones siempre visibles ── */
+/* ── GALLERY ── */
 const DEMO_OBRAS = [
   { id:'demo-0', num:'001', title:'Arrecife de Colores', autor:'Ney Salazar',   bg:'linear-gradient(135deg,#1a5c8a,#0e3d5e,#1a8a6b)', description:'Una exploración vibrante del mundo subacuático caribeño.' },
   { id:'demo-1', num:'002', title:'El Mar de Leva',      autor:'María García',  bg:'linear-gradient(135deg,#d4732a,#a84b18,#e8a855)', description:'El mar embravecido del Atlántico en tonos cálidos y arenosos.' },
@@ -502,61 +494,6 @@ const DEMO_OBRAS = [
   { id:'demo-4', num:'005', title:'Mi Isla Aventura',    autor:'Ettien Cepeda', bg:'linear-gradient(135deg,#2d6b4a,#1a3a2a,#4a8a6b)', description:'Una isla soñada llena de selvas y tesoros escondidos.' },
   { id:'demo-5', num:'006', title:'El Carro Rojo',       autor:'Carlos Mora',   bg:'linear-gradient(160deg,#8a3a1a,#c96b2a,#8a3a1a)', description:'Un auto de carreras imaginado con los colores del carnaval.' },
 ];
-
-/* ── LOAD SHOWCASE WORKS (para el banner del index.html) ── */
-async function loadShowcaseWorks() {
-  const ibArtFront = $('#ibArtFront');
-  const ibArtBack = $('#ibArtBack');
-  const ibLabelNum = $('#ibLabelNum');
-  const ibLabelTitle = $('#ibLabelTitle');
-  
-  if (!ibArtFront) return; // No estamos en el index.html
-  
-  try {
-    // Intentar cargar desde el servidor
-    const res = await fetch(`${API_BASE}/api/obras`);
-    const data = await res.json();
-    const obras = data.obras || DEMO_OBRAS;
-    
-    if (obras.length >= 2) {
-      const obra1 = obras[0];
-      const obra2 = obras[1];
-      
-      // Aplicar imágenes o gradientes a las tarjetas
-      if (obra1.url) {
-        const imgUrl = assetUrl(obra1.url);
-        ibArtFront.style.backgroundImage = `url('${imgUrl}')`;
-        ibArtFront.style.backgroundSize = 'cover';
-        ibArtFront.style.backgroundPosition = 'center';
-      } else if (obra1.bg) {
-        ibArtFront.style.background = obra1.bg;
-      }
-      
-      if (obra2.url) {
-        const imgUrl = assetUrl(obra2.url);
-        ibArtBack.style.backgroundImage = `url('${imgUrl}')`;
-        ibArtBack.style.backgroundSize = 'cover';
-        ibArtBack.style.backgroundPosition = 'center';
-      } else if (obra2.bg) {
-        ibArtBack.style.background = obra2.bg;
-      }
-      
-      // Actualizar etiquetas
-      if (ibLabelNum) ibLabelNum.textContent = `OBRA #${obra1.num || '001'}`;
-      if (ibLabelTitle) ibLabelTitle.textContent = obra1.title || 'Sin título';
-    }
-  } catch (err) {
-    // Si falla, usar DEMO_OBRAS
-    const obra1 = DEMO_OBRAS[0];
-    const obra2 = DEMO_OBRAS[1];
-    
-    if (obra1.bg) ibArtFront.style.background = obra1.bg;
-    if (obra2.bg) ibArtBack.style.background = obra2.bg;
-    
-    if (ibLabelNum) ibLabelNum.textContent = `OBRA #${obra1.num}`;
-    if (ibLabelTitle) ibLabelTitle.textContent = obra1.title;
-  }
-}
 
 async function loadGallery() {
   const grid = $('#galleryGrid');
@@ -572,14 +509,17 @@ async function loadGallery() {
   state.allObras = allObras;
   const BORDER_COLORS = ['#c0392b','#2d8a5a','#8a3a2d','#2a6b8a','#6b2d8a','#8a6b2d'];
 
-  grid.innerHTML = allObras.map((obra, i) => {
-    const thumb = obra.url
-      ? `<img src="${assetUrl(obra.url)}" alt="${obra.title}" loading="lazy" />`
-      : `<div style="background:${obra.bg||'#333'};width:100%;aspect-ratio:1/1"></div>`;
+  // Filtrar obras sin imagen (url vacía o rota)
+  const obrasConFoto = allObras.filter(obra => obra.url);
+  state.allObras = obrasConFoto;
+
+  grid.innerHTML = obrasConFoto.map((obra, i) => {
     const desc = obra.description || '¡Una obra increíble del museo!';
     return `
       <div class="gallery-item" data-index="${i}" style="border:2.5px solid ${BORDER_COLORS[i%BORDER_COLORS.length]}">
-        ${thumb}
+        <div class="gallery-thumb-wrap">
+          <img src="${assetUrl(obra.url)}" alt="${obra.title}" loading="lazy" />
+        </div>
         <div class="gallery-item-info">
           <div class="gallery-item-autor">${obra.autor||'Artista anónimo'}</div>
           <div class="gallery-item-title">${obra.title}</div>
@@ -594,15 +534,27 @@ async function loadGallery() {
 }
 
 function openDetail(obra, idx) {
+  const artistInfo = ARTIST_INFO[obra.style] || {};
   $('#detailNum').textContent   = `OBRA GENERADA #${obra.num}`;
   $('#detailTitle').textContent = obra.title;
   $('#detailAutor').textContent = `Autor: ${obra.autor}`;
   $('#detailDesc').textContent  = obra.description || '¡Una obra increíble llena de creatividad!';
+
+  /* Badge del artista en el detalle */
+  const detailBadge = $('#detailArtistBadge');
+  if (detailBadge && obra.style) {
+    detailBadge.innerHTML = `<span class="detail-artist-label">Artista identificado: <strong>${obra.style}</strong></span>`;
+    detailBadge.style.display = '';
+  } else if (detailBadge) {
+    detailBadge.style.display = 'none';
+  }
+
   const detailImg = $('#detailImg');
   const existing  = $('.detail-bg-placeholder');
   if (existing) existing.remove();
   if (obra.url) {
-    detailImg.src = assetUrl(obra.url); detailImg.style.display = '';
+    detailImg.src = assetUrl(obra.url);
+    detailImg.style.display = '';
   } else {
     detailImg.style.display = 'none';
     const div = document.createElement('div');
@@ -610,10 +562,11 @@ function openDetail(obra, idx) {
     div.style.cssText = `width:100%;height:320px;background:${obra.bg||'#333'}`;
     detailImg.parentNode.insertBefore(div, detailImg.nextSibling);
   }
-  const similar = state.allObras.map((item,index)=>({item,index})).filter(({index})=>index!==idx).slice(0,2);
+
+  const similar = state.allObras.map((item, index) => ({ item, index })).filter(({ index }) => index !== idx).slice(0, 2);
   const similarGrid = $('#similarGrid');
   if (similarGrid) {
-    similarGrid.innerHTML = similar.map(({item,index}) => {
+    similarGrid.innerHTML = similar.map(({ item, index }) => {
       const content = item.url
         ? `<img src="${assetUrl(item.url)}" alt="${item.title}" />`
         : `<div style="background:${item.bg||'#333'};width:100%;height:100%"></div>`;
@@ -629,6 +582,36 @@ function openDetail(obra, idx) {
 /* ══════════════════════════════════════════════════
    INIT
    ══════════════════════════════════════════════════ */
+/* ── HOMEPAGE: cargar imágenes reales en las ib-cards ── */
+async function initIbCards() {
+  try {
+    const res = await fetch(`${API_BASE}/api/obras`);
+    const data = await res.json();
+    const obras = (data.obras || []).filter(o => o.url);
+    if (obras.length === 0) return; // sin obras, dejar los gradientes por defecto
+
+    const front = $('.ib-card-front .ib-card-art');
+    const back  = $('.ib-card-back  .ib-card-art');
+    const labelNum   = $('.ib-label-num');
+    const labelTitle = $('.ib-label-title');
+
+    // card frontal: obra más reciente
+    if (front && obras[0]) {
+      front.style.backgroundImage = `url(${assetUrl(obras[0].url)})`;
+      front.style.backgroundSize  = 'cover';
+      front.style.backgroundPosition = 'center';
+      if (labelNum)   labelNum.textContent   = `OBRA #${obras[0].num}`;
+      if (labelTitle) labelTitle.textContent = obras[0].title;
+    }
+    // card trasera: segunda obra más reciente
+    if (back && obras[1]) {
+      back.style.backgroundImage = `url(${assetUrl(obras[1].url)})`;
+      back.style.backgroundSize  = 'cover';
+      back.style.backgroundPosition = 'center';
+    }
+  } catch { /* si el servidor no responde, quedan los gradientes */ }
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   initSplash();
   if (!isApp()) {
@@ -636,11 +619,13 @@ document.addEventListener('DOMContentLoaded', () => {
     initSiteTabs();
     initTabs();
     initScrollReveal();
-    loadShowcaseWorks();
+    initIbCards();
+    // Activar tab desde hash en URL (ej: index.html#tab-acerca)
+    const hash = window.location.hash.replace('#', '');
+    if (hash && document.getElementById(hash)) switchTab(hash);
   } else {
     initBackButtons();
     initCamera();
-    initStyleChips();
     initFormButtons();
     restoreLastScreen();
   }

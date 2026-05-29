@@ -23,7 +23,7 @@
     <h1 class="splash-title">Museo Artistico</h1>
   </div>
 
-  <!-- APP WRAPPER: single-page view controller -->
+  <!-- APP WRAPPER -->
   <div id="appWrapper" class="app-wrapper hidden">
 
     <!-- ===== SCREEN 1: HOME ===== -->
@@ -41,7 +41,7 @@
         <div class="home-hero">
           <p class="home-eyebrow">Explora el Caribe</p>
           <h1 class="home-title">Arte en cada<br/><em>trazo</em></h1>
-          <p class="home-body">Explora tu mundo artístico</p>
+          <p class="home-body">Sube una imagen y descubre qué artista famoso reconoce nuestra IA</p>
         </div>
         <div class="home-actions">
           <button type="button" class="btn btn-primary btn-full" id="btnCrear">
@@ -57,7 +57,7 @@
     <div class="app-screen" id="screen-camera">
       <div class="screen-header dark">
         <button type="button" class="back-btn" data-target="screen-home">←</button>
-        <h2>Escanea tu dibujo</h2>
+        <h2>Sube tu imagen</h2>
         <span></span>
       </div>
       <div class="camera-area">
@@ -96,7 +96,7 @@
     <div class="app-screen" id="screen-form">
       <div class="screen-scroll-inner">
         <div class="form-preview-img-wrap">
-          <img id="formPreviewImg" src="" alt="Tu dibujo" class="form-preview-img" />
+          <img id="formPreviewImg" src="" alt="Tu imagen" class="form-preview-img" />
         </div>
         <div class="form-card">
           <h2 class="form-title">Tu Obra</h2>
@@ -109,39 +109,51 @@
             <input type="text" id="obraAutor" placeholder="Tu nombre artístico" />
           </div>
           <div class="form-group">
-            <label>ESTILO ARTÍSTICO</label>
+            <label>RESULTADO DEL MODELO</label>
             <div class="ai-style-card" id="aiStyleCard">
               <span class="ai-style-kicker">IA Teachable Machine</span>
               <strong id="aiStyleName">Analizando imagen...</strong>
-              <p id="aiStyleConfidence">El modelo elegirá el estilo automáticamente.</p>
+              <p id="aiStyleConfidence">El modelo está identificando el artista.</p>
               <div class="ai-predictions" id="aiPredictions"></div>
             </div>
           </div>
-          <button type="button" class="btn btn-primary btn-full" id="btnGenerar">GENERAR ARTE</button>
+          <button type="button" class="btn btn-primary btn-full" id="btnGenerar">VER RESULTADO COMPLETO</button>
           <button type="button" class="btn btn-ghost btn-full" id="btnRetomar">TOMAR DE NUEVO</button>
         </div>
       </div>
     </div>
 
-    <!-- ===== SCREEN 4: TRANSFORMANDO (loading) ===== -->
+    <!-- ===== SCREEN 4: CARGANDO ===== -->
     <div class="app-screen" id="screen-loading">
       <div class="loading-inner">
         <div class="loading-spinner"></div>
-        <h2 class="loading-title">Transformando</h2>
+        <h2 class="loading-title">Identificando</h2>
         <p class="loading-dots" id="loadingDots">...</p>
-        <p class="loading-sub" id="loadingSub">Convirtiendo tu dibujo en arte</p>
+        <p class="loading-sub" id="loadingSub">Consultando el modelo de IA</p>
       </div>
     </div>
 
     <!-- ===== SCREEN 5: RESULT ===== -->
     <div class="app-screen" id="screen-result">
       <div class="screen-scroll-inner">
+
+        <!-- Imagen original del usuario -->
         <div class="result-img-wrap">
-          <img id="resultImg" src="" alt="Tu obra generada" class="result-img" />
+          <img id="resultImg" src="" alt="Tu imagen" class="result-img" />
         </div>
+
+        <!-- Barras de todas las predicciones -->
+        <div class="result-predictions-card">
+          <h3 class="result-pred-title">Probabilidades del modelo</h3>
+          <div id="resultPredictions"></div>
+        </div>
+
+        <!-- Acción: guardar en el museo -->
         <div class="result-card">
           <button type="button" class="btn btn-primary btn-full" id="btnGuardar">GUARDAR EN EL MUSEO</button>
+          <button type="button" class="btn btn-ghost btn-full" data-target="screen-camera" style="margin-top:10px">ANALIZAR OTRA IMAGEN</button>
         </div>
+
       </div>
     </div>
 
@@ -163,10 +175,14 @@
         <img id="detailImg" src="" alt="Obra" />
       </div>
       <div class="detail-card">
-        <button type="button" class="back-btn" data-target="screen-museo" style="margin-bottom:16px">← Volver</button>
+        <button type="button" class="back-btn dark" data-target="screen-museo" style="margin-bottom:16px">← Volver al museo</button>
         <p class="detail-num" id="detailNum">OBRA GENERADA #001</p>
         <h2 class="detail-title" id="detailTitle">Sin título</h2>
         <p class="detail-autor" id="detailAutor">Autor: —</p>
+
+        <!-- Badge artista en el detalle -->
+        <div id="detailArtistBadge" style="margin:12px 0"></div>
+
         <hr class="detail-sep"/>
         <p class="detail-desc" id="detailDesc"></p>
         <div class="similar-section">
