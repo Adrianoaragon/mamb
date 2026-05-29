@@ -1,196 +1,68 @@
 {
   "obras": [
     {
-      "id": 1780071735067,
-      "num": "012",
-      "title": "cabra",
-      "autor": "riqui riqui",
-      "style": "Vincent van Gogh",
-      "url": "/uploads/obra_1780071735067.jpg",
-      "originalUrl": "/uploads/original_1780071735067.jpg",
-      "description": "La IA encontró una energía vibrante en tu dibujo y lo llevó a pinceladas intensas, cielos en movimiento y colores llenos de emoción.",
-      "tags": [
-        "postimpresionismo",
-        "pincelada",
-        "color"
-      ],
-      "date": "29/5/2026"
-    },
-    {
-      "id": 1780071102196,
-      "num": "011",
-      "title": "cabra",
-      "autor": "riqui riqui",
-      "style": "Vincent van Gogh",
-      "url": "/uploads/obra_1780071102196.jpg",
-      "originalUrl": "/uploads/original_1780071102196.jpg",
-      "description": "La IA encontró una energía vibrante en tu dibujo y lo llevó a pinceladas intensas, cielos en movimiento y colores llenos de emoción.",
-      "tags": [
-        "postimpresionismo",
-        "pincelada",
-        "color"
-      ],
-      "date": "29/5/2026"
-    },
-    {
-      "id": 1779847289388,
-      "num": "010",
-      "title": "Sin título",
-      "autor": "Artista anónimo",
-      "style": "Pablo Picasso",
-      "url": "/uploads/obra_1779847289388.jpg",
-      "originalUrl": "/uploads/original_1779847289388.jpg",
-      "description": "La IA transformó tu imagen con formas audaces y planos expresivos, como una composición moderna llena de carácter.",
-      "tags": [
-        "cubismo",
-        "formas",
-        "moderno"
-      ],
-      "date": "26/5/2026"
-    },
-    {
-      "id": 1779825318498,
-      "num": "009",
-      "title": "cabra",
-      "autor": "riqui riqui",
-      "style": "Vincent van Gogh",
-      "url": "/uploads/obra_1779825318498.jpg",
-      "originalUrl": "/uploads/original_1779825318498.jpg",
-      "description": "La IA encontró una energía vibrante en tu dibujo y lo llevó a pinceladas intensas, cielos en movimiento y colores llenos de emoción.",
-      "tags": [
-        "postimpresionismo",
-        "pincelada",
-        "color"
-      ],
-      "date": "26/5/2026"
-    },
-    {
-      "id": 1779749867676,
-      "num": "008",
-      "title": "faafafa",
-      "autor": "Artista anónimo",
-      "style": "Leonardo da Vinci",
-      "url": "/uploads/obra_1779749867676.jpg",
-      "originalUrl": "/uploads/original_1779749867676.jpg",
-      "description": "Tu dibujo fue interpretado con una mirada renacentista: luces suaves, misterio y detalles delicados como si saliera de un taller italiano.",
-      "tags": [
-        "renacimiento",
-        "sfumato",
-        "detalle"
-      ],
-      "date": "25/5/2026"
-    },
-    {
-      "id": 1779748293014,
-      "num": "007",
-      "title": "Cabra",
-      "autor": "Ney",
-      "style": "Pablo Picasso",
-      "url": "/uploads/obra_1779748293014.jpg",
-      "originalUrl": "/uploads/original_1779748293014.jpg",
-      "description": "La IA transformó tu imagen con formas audaces y planos expresivos, como una composición moderna llena de carácter.",
-      "tags": [
-        "cubismo",
-        "formas",
-        "moderno"
-      ],
-      "date": "25/5/2026"
-    },
-    {
-      "id": 1779748057700,
-      "num": "006",
-      "title": "Lamine Yamal",
-      "autor": "Artista anónimo",
-      "style": "Leonardo da Vinci",
-      "url": "/uploads/obra_1779748057700.jpg",
-      "originalUrl": "/uploads/original_1779748057700.jpg",
-      "description": "Tu dibujo fue interpretado con una mirada renacentista: luces suaves, misterio y detalles delicados como si saliera de un taller italiano.",
-      "tags": [
-        "renacimiento",
-        "sfumato",
-        "detalle"
-      ],
-      "date": "25/5/2026"
-    },
-    {
-      "id": 1779748028543,
-      "num": "005",
-      "title": "Sin título",
-      "autor": "Artista anónimo",
-      "style": "Leonardo da Vinci",
-      "url": "/uploads/obra_1779748028543.jpg",
-      "originalUrl": "/uploads/original_1779748028543.jpg",
-      "description": "Tu dibujo fue interpretado con una mirada renacentista: luces suaves, misterio y detalles delicados como si saliera de un taller italiano.",
-      "tags": [
-        "renacimiento",
-        "sfumato",
-        "detalle"
-      ],
-      "date": "25/5/2026"
-    },
-    {
-      "id": 1779747920029,
+      "id": 1780078203628,
       "num": "004",
-      "title": "Sin título",
-      "autor": "Artista anónimo",
+      "title": "La dama del armiño",
+      "autor": "Lucho Torres",
+      "style": "Leonardo da Vinci",
+      "url": "/uploads/obra_1780078203628.jpg",
+      "originalUrl": "/uploads/original_1780078203628.jpg",
+      "description": "Maestro del sfumato y la perspectiva. Sus obras combinan arte y ciencia con una precisión sin igual.",
+      "tags": [
+        "renacimiento",
+        "sfumato",
+        "detalle"
+      ],
+      "date": "29/5/2026"
+    },
+    {
+      "id": 1780076801928,
+      "num": "003",
+      "title": "Los comedores de patatas",
+      "autor": "Mr. Tinker",
+      "style": "Vincent van Gogh",
+      "url": "/uploads/obra_1780076801928.jpg",
+      "originalUrl": "/uploads/original_1780076801928.jpg",
+      "description": "Pinceladas vibrantes y colores expresivos que transmiten emoción pura. Uno de los artistas más influyentes de la historia.",
+      "tags": [
+        "postimpresionismo",
+        "pincelada",
+        "color"
+      ],
+      "date": "29/5/2026"
+    },
+    {
+      "id": 1780075053631,
+      "num": "002",
+      "title": "El viejo guitarrista ciego",
+      "autor": "Yo mismo",
       "style": "Pablo Picasso",
-      "url": "/uploads/obra_1779747920029.jpg",
-      "originalUrl": "/uploads/original_1779747920029.jpg",
-      "description": "La IA transformó tu imagen con formas audaces y planos expresivos, como una composición moderna llena de carácter.",
+      "url": "/uploads/obra_1780075053631.jpg",
+      "originalUrl": "/uploads/original_1780075053631.jpg",
+      "description": "Revolucionó el arte con formas geométricas y perspectivas múltiples. Cofundador del cubismo y figura central del arte moderno.",
       "tags": [
         "cubismo",
         "formas",
         "moderno"
       ],
-      "date": "25/5/2026"
+      "date": "29/5/2026"
     },
     {
-      "id": 1779747901926,
-      "num": "003",
-      "title": "Sin título",
-      "autor": "Artista anónimo",
-      "style": "Leonardo da Vinci",
-      "url": "/uploads/obra_1779747901926.jpg",
-      "originalUrl": "/uploads/original_1779747901926.jpg",
-      "description": "Tu dibujo fue interpretado con una mirada renacentista: luces suaves, misterio y detalles delicados como si saliera de un taller italiano.",
-      "tags": [
-        "renacimiento",
-        "sfumato",
-        "detalle"
-      ],
-      "date": "25/5/2026"
-    },
-    {
-      "id": 1779746917351,
-      "num": "002",
-      "title": "Sin título",
-      "autor": "Artista anónimo",
-      "style": "Leonardo da Vinci",
-      "url": "/uploads/obra_1779746917351.jpg",
-      "originalUrl": "/uploads/original_1779746917351.jpg",
-      "description": "Tu dibujo fue interpretado con una mirada renacentista: luces suaves, misterio y detalles delicados como si saliera de un taller italiano.",
-      "tags": [
-        "renacimiento",
-        "sfumato",
-        "detalle"
-      ],
-      "date": "25/5/2026"
-    },
-    {
-      "id": 1779746839171,
+      "id": 1780074981001,
       "num": "001",
-      "title": "Sin título",
-      "autor": "Artista anónimo",
-      "style": "Leonardo da Vinci",
-      "url": "/uploads/obra_1779746839171.jpg",
-      "originalUrl": "/uploads/original_1779746839171.jpg",
-      "description": "Tu dibujo fue interpretado con una mirada renacentista: luces suaves, misterio y detalles delicados como si saliera de un taller italiano.",
+      "title": "Si",
+      "autor": "Ney Salazar",
+      "style": "Diego Velázquez",
+      "url": "/uploads/obra_1780074981001.jpg",
+      "originalUrl": "/uploads/original_1780074981001.jpg",
+      "description": "Maestro del retrato y la luz. Su técnica realista y teatral lo convierte en el pintor más importante del Siglo de Oro español.",
       "tags": [
-        "renacimiento",
-        "sfumato",
-        "detalle"
+        "barroco",
+        "retrato",
+        "luz"
       ],
-      "date": "25/5/2026"
+      "date": "29/5/2026"
     }
   ]
 }
