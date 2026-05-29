@@ -62,18 +62,33 @@
       </div>
       <div class="camera-area">
         <div class="camera-frame" id="cameraFrame">
+          <video id="cameraVideo" class="camera-video hidden" playsinline></video>
+          <canvas id="cameraCanvas" class="hidden"></canvas>
           <svg class="camera-icon" width="48" height="40" viewBox="0 0 24 20" fill="none" stroke="#555" stroke-width="1.2">
             <rect x="1" y="5" width="22" height="14" rx="2"/>
             <circle cx="12" cy="12" r="4"/>
             <path d="M9 5V3h6v2"/>
           </svg>
-          <p class="camera-hint">Toca para tomar foto o subir imagen</p>
+          <p class="camera-hint" id="cameraHint">Elige una opción</p>
           <img id="previewImg" class="preview-img hidden" alt="Vista previa"/>
         </div>
-        <input type="file" id="fileInput" accept="image/*" capture="environment" class="hidden" />
-        <button type="button" class="shutter-btn" id="shutterBtn">
-          <div class="shutter-inner"></div>
-        </button>
+        <div class="camera-options" id="cameraOptions">
+          <button type="button" class="btn btn-primary btn-full" id="btnTakePhoto">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"/><path d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            TOMAR FOTO
+          </button>
+          <button type="button" class="btn btn-outline btn-full" id="btnUploadImage">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+            SUBIR IMAGEN
+          </button>
+        </div>
+        <div class="camera-controls hidden" id="cameraControls">
+          <button type="button" class="shutter-btn" id="shutterBtn">
+            <div class="shutter-inner"></div>
+          </button>
+          <button type="button" class="btn btn-ghost" id="btnCancelCamera" style="margin-top:16px">CANCELAR</button>
+        </div>
+        <input type="file" id="fileInput" accept="image/*" class="hidden" />
       </div>
     </div>
 

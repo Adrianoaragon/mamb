@@ -1,6 +1,22 @@
 {
   "obras": [
     {
+      "id": 1780071102196,
+      "num": "011",
+      "title": "cabra",
+      "autor": "riqui riqui",
+      "style": "Vincent van Gogh",
+      "url": "/uploads/obra_1780071102196.jpg",
+      "originalUrl": "/uploads/original_1780071102196.jpg",
+      "description": "La IA encontró una energía vibrante en tu dibujo y lo llevó a pinceladas intensas, cielos en movimiento y colores llenos de emoción.",
+      "tags": [
+        "postimpresionismo",
+        "pincelada",
+        "color"
+      ],
+      "date": "29/5/2026"
+    },
+    {
       "id": 1779847289388,
       "num": "010",
       "title": "Sin título",

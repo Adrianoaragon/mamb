@@ -223,27 +223,143 @@ function loadImageElement(src) {
 }
 
 /* ── CAMERA / FILE UPLOAD ── */
+let cameraStream = null;
+
+function closeCameraStream() {
+  if (cameraStream) {
+    cameraStream.getTracks().forEach(track => track.stop());
+    cameraStream = null;
+  }
+}
+
+function resetCameraScreen() {
+  closeCameraStream();
+  const videoEl = $('#cameraVideo');
+  const cameraOptions = $('#cameraOptions');
+  const cameraControls = $('#cameraControls');
+  const cameraHint = $('#cameraHint');
+  const previewImg = $('#previewImg');
+  const icon = $('.camera-icon');
+  
+  if (videoEl) videoEl.classList.add('hidden');
+  if (icon) icon.classList.remove('hidden');
+  if (previewImg) previewImg.classList.add('hidden');
+  if (cameraHint) cameraHint.textContent = 'Elige una opción';
+  if (cameraOptions) cameraOptions.classList.remove('hidden');
+  if (cameraControls) cameraControls.classList.add('hidden');
+}
+
+async function startCameraCapture() {
+  const cameraOptions = $('#cameraOptions');
+  const cameraControls = $('#cameraControls');
+  const videoEl = $('#cameraVideo');
+  const cameraHint = $('#cameraHint');
+  const icon = $('.camera-icon');
+  
+  try {
+    cameraStream = await navigator.mediaDevices.getUserMedia({
+      video: { facingMode: 'environment', width: { ideal: 1280 }, height: { ideal: 720 } },
+      audio: false
+    });
+    
+    if (videoEl) {
+      videoEl.srcObject = cameraStream;
+      videoEl.classList.remove('hidden');
+    }
+    if (icon) icon.classList.add('hidden');
+    if (cameraHint) cameraHint.textContent = 'Encuadra tu dibujo';
+    if (cameraOptions) cameraOptions.classList.add('hidden');
+    if (cameraControls) cameraControls.classList.remove('hidden');
+  } catch (err) {
+    console.error('Error accessing camera:', err);
+    alert('No se pudo acceder a la cámara. Por favor, verifica los permisos.');
+    resetCameraScreen();
+  }
+}
+
+function capturePhotoFromVideo() {
+  const videoEl = $('#cameraVideo');
+  const canvas = $('#cameraCanvas');
+  
+  if (!videoEl || !canvas) return null;
+  
+  canvas.width = videoEl.videoWidth;
+  canvas.height = videoEl.videoHeight;
+  
+  const ctx = canvas.getContext('2d');
+  if (!ctx) return null;
+  
+  ctx.drawImage(videoEl, 0, 0);
+  closeCameraStream();
+  return canvas.toDataURL('image/jpeg', 0.85);
+}
+
 function initCamera() {
-  const frame = $('#cameraFrame'), fileInput = $('#fileInput');
-  const shutterBtn = $('#shutterBtn'), previewImg = $('#previewImg');
-  if (!frame) return;
-  frame.addEventListener('click', () => fileInput?.click());
-  shutterBtn?.addEventListener('click', () => fileInput?.click());
+  const btnTakePhoto = $('#btnTakePhoto');
+  const btnUploadImage = $('#btnUploadImage');
+  const btnCancelCamera = $('#btnCancelCamera');
+  const shutterBtn = $('#shutterBtn');
+  const fileInput = $('#fileInput');
+  
+  // Botón para tomar foto
+  btnTakePhoto?.addEventListener('click', startCameraCapture);
+  
+  // Botón para cancelar captura de cámara
+  btnCancelCamera?.addEventListener('click', resetCameraScreen);
+  
+  // Botón para disparar la cámara
+  shutterBtn?.addEventListener('click', () => {
+    const photoData = capturePhotoFromVideo();
+    if (photoData) {
+      state.currentImage = photoData;
+      const previewImg = $('#previewImg');
+      if (previewImg) {
+        previewImg.src = photoData;
+        previewImg.classList.remove('hidden');
+      }
+      // Esperar a que se renderice la imagen antes de ir al form
+      setTimeout(() => {
+        goToForm();
+        classifyCurrentImage();
+      }, 100);
+    }
+  });
+  
+  // Botón para subir imagen
+  btnUploadImage?.addEventListener('click', () => fileInput?.click());
+  
+  // File input para subir archivos
   fileInput?.addEventListener('change', (e) => {
     const file = e.target.files?.[0];
     if (!file) return;
+    
     const reader = new FileReader();
     reader.onload = async (ev) => {
       state.currentImage = ev.target.result;
-      if (previewImg) { previewImg.src = ev.target.result; previewImg.classList.remove('hidden'); }
+      const previewImg = $('#previewImg');
+      if (previewImg) {
+        previewImg.src = ev.target.result;
+        previewImg.classList.remove('hidden');
+      }
       goToForm();
       await classifyCurrentImage();
     };
     reader.readAsDataURL(file);
+    // Reset file input para poder seleccionar el mismo archivo otra vez
+    fileInput.value = '';
+  });
+  
+  // Limpiar cámara cuando se abandone la pantalla
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden && !$('#screen-camera.active')) {
+      closeCameraStream();
+    }
   });
 }
 
 function goToForm() {
+  closeCameraStream();
+  resetCameraScreen();
   const formImg = $('#formPreviewImg');
   if (formImg && state.currentImage) formImg.src = state.currentImage;
   showScreen('screen-form');
