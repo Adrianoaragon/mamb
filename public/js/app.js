@@ -503,6 +503,61 @@ const DEMO_OBRAS = [
   { id:'demo-5', num:'006', title:'El Carro Rojo',       autor:'Carlos Mora',   bg:'linear-gradient(160deg,#8a3a1a,#c96b2a,#8a3a1a)', description:'Un auto de carreras imaginado con los colores del carnaval.' },
 ];
 
+/* ── LOAD SHOWCASE WORKS (para el banner del index.html) ── */
+async function loadShowcaseWorks() {
+  const ibArtFront = $('#ibArtFront');
+  const ibArtBack = $('#ibArtBack');
+  const ibLabelNum = $('#ibLabelNum');
+  const ibLabelTitle = $('#ibLabelTitle');
+  
+  if (!ibArtFront) return; // No estamos en el index.html
+  
+  try {
+    // Intentar cargar desde el servidor
+    const res = await fetch(`${API_BASE}/api/obras`);
+    const data = await res.json();
+    const obras = data.obras || DEMO_OBRAS;
+    
+    if (obras.length >= 2) {
+      const obra1 = obras[0];
+      const obra2 = obras[1];
+      
+      // Aplicar imágenes o gradientes a las tarjetas
+      if (obra1.url) {
+        const imgUrl = assetUrl(obra1.url);
+        ibArtFront.style.backgroundImage = `url('${imgUrl}')`;
+        ibArtFront.style.backgroundSize = 'cover';
+        ibArtFront.style.backgroundPosition = 'center';
+      } else if (obra1.bg) {
+        ibArtFront.style.background = obra1.bg;
+      }
+      
+      if (obra2.url) {
+        const imgUrl = assetUrl(obra2.url);
+        ibArtBack.style.backgroundImage = `url('${imgUrl}')`;
+        ibArtBack.style.backgroundSize = 'cover';
+        ibArtBack.style.backgroundPosition = 'center';
+      } else if (obra2.bg) {
+        ibArtBack.style.background = obra2.bg;
+      }
+      
+      // Actualizar etiquetas
+      if (ibLabelNum) ibLabelNum.textContent = `OBRA #${obra1.num || '001'}`;
+      if (ibLabelTitle) ibLabelTitle.textContent = obra1.title || 'Sin título';
+    }
+  } catch (err) {
+    // Si falla, usar DEMO_OBRAS
+    const obra1 = DEMO_OBRAS[0];
+    const obra2 = DEMO_OBRAS[1];
+    
+    if (obra1.bg) ibArtFront.style.background = obra1.bg;
+    if (obra2.bg) ibArtBack.style.background = obra2.bg;
+    
+    if (ibLabelNum) ibLabelNum.textContent = `OBRA #${obra1.num}`;
+    if (ibLabelTitle) ibLabelTitle.textContent = obra1.title;
+  }
+}
+
 async function loadGallery() {
   const grid = $('#galleryGrid');
   if (!grid) return;
@@ -581,6 +636,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initSiteTabs();
     initTabs();
     initScrollReveal();
+    loadShowcaseWorks();
   } else {
     initBackButtons();
     initCamera();

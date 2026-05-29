@@ -335,10 +335,10 @@ button { cursor: pointer; font-family: inherit; border: none; background: none; 
 }
 .ib-card-art {
   width: 100%; height: 100%; background-size: cover; background-position: center;
+  position: relative;
 }
 .ib-art-1 {
   background: linear-gradient(135deg, #1a5c8a 0%, #0e3d5e 30%, #1a8a6b 60%, #0e5e3d 100%);
-  position: relative;
 }
 .ib-art-1::after {
   content: '';
@@ -347,9 +347,24 @@ button { cursor: pointer; font-family: inherit; border: none; background: none; 
     45deg, transparent, transparent 8px,
     rgba(255,255,255,.05) 8px, rgba(255,255,255,.05) 9px
   );
+  opacity: 0;
+  pointer-events: none;
+}
+.ib-art-1[style*="backgroundImage"]::after {
+  opacity: 0;
 }
 .ib-art-2 {
   background: linear-gradient(135deg, #d4732a 0%, #a84b18 40%, #e8a855 100%);
+}
+.ib-art-2::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: rgba(0,0,0,.08);
+  opacity: 1;
+  pointer-events: none;
+}
+.ib-art-2[style*="backgroundImage"]::after {
+  background: rgba(0,0,0,.12);
 }
 .ib-card-label {
   position: absolute; bottom: 0; left: 0; right: 0;
