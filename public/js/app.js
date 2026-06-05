@@ -285,7 +285,11 @@ async function startCameraCapture() {
     });
     if (videoEl) {
       videoEl.srcObject = cameraStream;
+      videoEl.setAttribute('playsinline', '');
+      videoEl.setAttribute('autoplay', '');
+      videoEl.setAttribute('muted', '');
       videoEl.classList.remove('hidden');
+      videoEl.play().catch(() => {});
     }
     if (icon) icon.classList.add('hidden');
     if (cameraHint) cameraHint.textContent = 'Encuadra tu dibujo';
