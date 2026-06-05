@@ -378,8 +378,7 @@ function initFormButtons() {
   $('#btnCrear')?.addEventListener('click', () => { sessionStorage.setItem('mambLastScreen', 'screen-camera'); showScreen('screen-camera'); });
   $('#btnMuseo')?.addEventListener('click', showMuseumScreen);
   $('#btnRetomar')?.addEventListener('click', () => { sessionStorage.setItem('mambLastScreen', 'screen-camera'); showScreen('screen-camera'); });
-  $('#btnGenerar')?.addEventListener('click', handleGenerate);
-  $('#btnGuardar')?.addEventListener('click', handleSave);
+  $('#btnGenerar')?.addEventListener('click', handleSave);
 }
 
 /* ── GENERATION — muestra resultado de clasificación ── */
@@ -468,17 +467,25 @@ function showResultScreen(artistName, confidence, artistInfo) {
 
 /* ── SAVE TO SERVER ── */
 async function handleSave() {
-  const btn = $('#btnGuardar');
+  const title = $('#obraTitle')?.value.trim() || 'Sin título';
+  const autor = $('#obraAutor')?.value.trim() || 'Artista anónimo';
+  state.currentTitle = title;
+  state.currentAutor = autor;
+
+  if (!state.currentImage) { alert('Por favor toma o sube una foto primero.'); return; }
+  if (!state.aiPrediction) { alert('Espera a que el modelo termine de analizar la imagen.'); return; }
+
+  const btn = $('#btnGenerar');
   if (btn) { btn.disabled = true; btn.textContent = 'Guardando...'; }
   try {
     const res = await fetch(`${API_BASE}/api/save-obra`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        title: state.currentTitle,
-        autor: state.currentAutor,
+        title,
+        autor,
         style: state.currentStyle,
-        generatedImage: state.resultImage,
+        generatedImage: state.currentImage,
         originalImage: state.currentImage,
         description: state.resultDescription,
         tags: state.resultTags,

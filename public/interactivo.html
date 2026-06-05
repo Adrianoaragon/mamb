@@ -117,7 +117,7 @@
               <div class="ai-predictions" id="aiPredictions"></div>
             </div>
           </div>
-          <button type="button" class="btn btn-primary btn-full" id="btnGenerar">VER RESULTADO COMPLETO</button>
+          <button type="button" class="btn btn-primary btn-full" id="btnGenerar">GUARDAR EN EL MUSEO</button>
           <button type="button" class="btn btn-ghost btn-full" id="btnRetomar">TOMAR DE NUEVO</button>
         </div>
       </div>
@@ -133,29 +133,7 @@
       </div>
     </div>
 
-    <!-- ===== SCREEN 5: RESULT ===== -->
-    <div class="app-screen" id="screen-result">
-      <div class="screen-scroll-inner">
 
-        <!-- Imagen original del usuario -->
-        <div class="result-img-wrap">
-          <img id="resultImg" src="" alt="Tu imagen" class="result-img" />
-        </div>
-
-        <!-- Barras de todas las predicciones -->
-        <div class="result-predictions-card">
-          <h3 class="result-pred-title">Probabilidades del modelo</h3>
-          <div id="resultPredictions"></div>
-        </div>
-
-        <!-- Acción: guardar en el museo -->
-        <div class="result-card">
-          <button type="button" class="btn btn-primary btn-full" id="btnGuardar">GUARDAR EN EL MUSEO</button>
-          <button type="button" class="btn btn-ghost btn-full" data-target="screen-camera" style="margin-top:10px">ANALIZAR OTRA IMAGEN</button>
-        </div>
-
-      </div>
-    </div>
 
     <!-- ===== SCREEN 6: MUSEO GALLERY ===== -->
     <div class="app-screen" id="screen-museo">
@@ -199,9 +177,9 @@
         <button type="button" data-target="screen-museo" class="bnav-btn active">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="1"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
         </button>
-        <button type="button" data-target="screen-detail" class="bnav-btn">
+        <a href="index.html#tab-acerca" class="bnav-btn">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-        </button>
+        </a>
       </nav>
     </div>
 
