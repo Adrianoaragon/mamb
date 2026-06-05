@@ -492,6 +492,15 @@ async function handleSave() {
       }),
     });
     if (!res.ok) throw new Error('Server error');
+    // Limpiar formulario para la próxima obra
+    const titleInput = $('#obraTitle');
+    const autorInput = $('#obraAutor');
+    if (titleInput) titleInput.value = '';
+    if (autorInput) autorInput.value = '';
+    state.currentImage = null;
+    state.aiPrediction = null;
+    state.aiPredictions = [];
+    state.currentStyle = 'Vincent van Gogh';
     await showMuseumScreen();
   } catch (err) {
     console.error('Save error:', err);
