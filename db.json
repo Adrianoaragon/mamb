@@ -1,6 +1,22 @@
 {
   "obras": [
     {
+      "id": 1780687592818,
+      "num": "005",
+      "title": "SI",
+      "autor": "YoMismoMismo",
+      "style": "Leonardo da Vinci",
+      "url": "/uploads/obra_1780687592818.jpg",
+      "originalUrl": "/uploads/original_1780687592818.jpg",
+      "description": "Maestro del sfumato y la perspectiva. Sus obras combinan arte y ciencia con una precisión sin igual.",
+      "tags": [
+        "renacimiento",
+        "sfumato",
+        "detalle"
+      ],
+      "date": "5/6/2026"
+    },
+    {
       "id": 1780078203628,
       "num": "004",
       "title": "La dama del armiño",

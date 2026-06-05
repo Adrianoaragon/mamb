@@ -14,5 +14,8 @@
     "interactivo"
   ],
   "author": "USB - Ingenieria de Sistemas - Adriano Aragon, Sebastian Blanco, Santiago Perez, Ney Salazar",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "sharp": "^0.33.4"
+  }
 }

@@ -1,6 +1,8 @@
 const http = require('http');
 const fs = require('fs');
 const path = require('path');
+let sharp;
+try { sharp = require('sharp'); } catch { sharp = null; }
 
 const PORT = process.env.PORT || 3000;
 const ROOT = __dirname;
@@ -82,9 +84,19 @@ function serveFile(res, filePath) {
   });
 }
 
-function saveImage(dataUrl, filename) {
+async function saveImage(dataUrl, filename) {
   const base64 = dataUrl.replace(/^data:image\/\w+;base64,/, '');
-  fs.writeFileSync(path.join(UPLOADS_DIR, filename), Buffer.from(base64, 'base64'));
+  const buffer = Buffer.from(base64, 'base64');
+  const outPath = path.join(UPLOADS_DIR, filename);
+  if (sharp) {
+    // Comprimir a JPEG calidad 75, max 1200px de ancho
+    await sharp(buffer)
+      .resize({ width: 1200, withoutEnlargement: true })
+      .jpeg({ quality: 75, progressive: true })
+      .toFile(outPath);
+  } else {
+    fs.writeFileSync(outPath, buffer);
+  }
 }
 
 async function handleApi(req, res) {
@@ -112,12 +124,12 @@ async function handleApi(req, res) {
 
       const ts = Date.now();
       const genFilename = `obra_${ts}.jpg`;
-      saveImage(generatedImage, genFilename);
+      await saveImage(generatedImage, genFilename);
 
       let origFilename = null;
       if (originalImage) {
         origFilename = `original_${ts}.jpg`;
-        saveImage(originalImage, origFilename);
+        await saveImage(originalImage, origFilename);
       }
 
       const db = loadDB();

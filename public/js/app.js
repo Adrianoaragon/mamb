@@ -165,6 +165,8 @@ function showScreen(id) {
   $$('.app-screen').forEach(s => s.classList.remove('active'));
   const t = $(`#${id}`);
   if (t) { t.classList.add('active'); t.scrollTop = 0; }
+  // Detener cámara si salimos de screen-camera
+  if (!id.includes('camera')) closeCameraStream();
 }
 
 async function showMuseumScreen() {
@@ -182,8 +184,11 @@ function initBackButtons() {
     btn.addEventListener('click', () => {
       const target = btn.dataset.target;
       sessionStorage.setItem('mambLastScreen', target);
-      if (target === 'screen-museo') loadGallery();
-      showScreen(target);
+      if (target === 'screen-museo') {
+        showMuseumScreen();
+      } else {
+        showScreen(target);
+      }
     });
   });
 }
